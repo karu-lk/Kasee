@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    image: "nelly-bee-web"
+    ports:
+     - "3002:3002"
+  # api:
+  #   build: ./../api/

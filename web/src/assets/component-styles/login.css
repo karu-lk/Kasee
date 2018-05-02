@@ -1,0 +1,56 @@
+  .main {
+  	max-width: 320px;
+  	margin: 0 auto;
+  }
+
+  .login-container {
+  	margin: 10px auto 10px auto;
+  	width: 40%;
+  	border: 3px solid green;
+  	padding: 10px;
+  	background: rgb(247, 247, 247);
+  	border: 1px solid rgba(147, 184, 189, 0.8);
+  	-webkit-box-shadow: 0pt 2px 5px rgba(105, 108, 109, 0.7), 0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+  	-moz-box-shadow: 0pt 2px 5px rgba(105, 108, 109, 0.7), 0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+  	box-shadow: 0pt 2px 5px rgba(105, 108, 109, 0.7), 0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+  	-webkit-box-shadow: 5px;
+  	-moz-border-radius: 5px;
+  	border-radius: 5px;
+  }
+
+  .login-or {
+  	position: relative;
+  	font-size: 18px;
+  	color: #aaa;
+  	margin-top: 10px;
+  	margin-bottom: 10px;
+  	padding-top: 10px;
+  	padding-bottom: 10px;
+  }
+
+  .login-btn{
+	  width: 100%;
+  }
+
+  .span-or {
+  	display: block;
+  	position: absolute;
+  	left: 50%;
+  	top: -2px;
+  	margin-left: -25px;
+  	background-color: #fff;
+  	width: 50px;
+  	text-align: center;
+  }
+
+  .hr-or {
+  	background-color: #cdcdcd;
+  	height: 1px;
+  	margin-top: 0px !important;
+  	margin-bottom: 0px !important;
+  }
+
+  h3 {
+  	text-align: center;
+  	line-height: 300%;
+  }

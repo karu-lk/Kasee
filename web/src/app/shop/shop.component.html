@@ -1,0 +1,14 @@
+<p>
+  shop works!
+</p>
+<div id="owl-slider">
+  <!-- You can use owl-carousel selector to include its component -->
+  <owl-carousel [options]="carouselOptions" [items]="images" [carouselClasses]="['owl-theme', 'row', 'sliding']">
+    <div class="item" *ngFor="let image of images;let i = index">
+      <div class="coupons-div" style="cursor:pointer;">
+        <img class="deals-image" src="{{image}}" />
+        <br/>
+      </div>
+    </div>
+  </owl-carousel>
+</div>
