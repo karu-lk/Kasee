@@ -21,7 +21,7 @@ class Server {
     }
     // application config
     config() {
-        const MONGO_URI = 'mongodb://localhost/nellybeedb';
+        const MONGO_URI = 'mongodb://localhost/kaseedb';
         mongoose.connect(MONGO_URI || process.env.MONGODB_URI);
         // express middleware
         this.app.use(bodyParser.urlencoded({ extended: true }));
