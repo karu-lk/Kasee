@@ -144,8 +144,8 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   
   /* ------------------------------------ */
   input {
-      outline: none;
-      border: none !important;
+      /* outline: none;
+      border: none !important; */
   }
   
   textarea {
@@ -805,8 +805,8 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
     height: 20px;
     width: 1px;
     background-color: #e5e5e5;
-    margin-left: 23px;
-    margin-right: 23px;
+    margin-left: 8px;
+    margin-right: 8px;
     margin-top: 5px;
   }
   
@@ -2353,4 +2353,12 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   
   #owl-slider{
     margin-top: 0px;
+  }
+
+  /* forms */
+
+  .customer-form{
+    width: 45%;
+    margin: 10px 30px 10px 30px;
+    padding: 10px 30px 10px 30px;
   }

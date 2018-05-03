@@ -1,0 +1,32 @@
+<div class="customer-form border border-info">
+  <!-- <form #customerForm="ngForm" (ngSubmit)="submitCustomer(customerForm.form);"> -->
+  <form [formGroup]="customerForm" (ngSubmit)="submitCustomer()">
+    <div class="form-group">
+      <label for="customerNumber">Customer Number</label>
+      <input type="text" class="form-control" id="customerNumber" aria-describedby="emailHelp" placeholder="Customer Number (A-Z, a-z, 0-9)"
+        required maxlength="12" formControlName="customerNumber">
+    </div>
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" id="firstName" placeholder="Customer first name" required maxlength="45" formControlName="firstName">
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" id="lastName" placeholder="Customer last name" required maxlength="45" formControlName="lastName">
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" placeholder="Customer email address" formControlName="email">
+    </div>
+    <div class="form-group">
+      <label for="mobileNumber">Mobile Number</label>
+      <input type="text" class="form-control" id="mobileNumber" placeholder="Customer mobile number" formControlName="mobileNumber">
+    </div>
+    <div class="form-group">
+      <label for="identificationComment">Comments</label>
+      <input type="text" class="form-control" id="identificationComment" placeholder="Comments" formControlName="identificationComment">
+    </div>
+
+    <button class="btn btn-primary" [disabled]="!customerForm.valid">Submit</button>
+  </form>
+</div>

@@ -8,10 +8,10 @@ import * as mongoose from 'mongoose';
 import * as logger from 'morgan';
 import * as path from 'path';
 
-import productController from './controllers/productController';
-import productCategoryController from './controllers/productCategoryController';
-import productImageGalleryController from './controllers/productImageGalleryController';
-import stockController from './controllers/stockController';
+import customerController from './controllers/customerController';
+// import productCategoryController from './controllers/productCategoryController';
+// import productImageGalleryController from './controllers/productImageGalleryController';
+// import stockController from './controllers/stockController';
 import userProfileController from './controllers/userProfileController';
 
 class Server {
@@ -55,10 +55,10 @@ class Server {
     const router: express.Router = express.Router();
 
     this.app.use('/', router);
-    this.app.use('/api/v1/products', productController);
-    this.app.use('/api/v1/product-categories', productCategoryController);
-    this.app.use('/api/v1/product-images', productImageGalleryController);
-    this.app.use('/api/v1/stock', stockController);
+    this.app.use('/api/v1/customers', customerController);
+    // this.app.use('/api/v1/product-categories', productCategoryController);
+    // this.app.use('/api/v1/product-images', productImageGalleryController);
+    // this.app.use('/api/v1/stock', stockController);
     this.app.use('/api/v1/users', userProfileController);
   }
 }

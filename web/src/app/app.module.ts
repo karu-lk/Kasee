@@ -6,18 +6,21 @@ import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
 import { OwlModule } from 'ngx-owl-carousel';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, } from "angular5-social-login";
 import { HttpModule } from '@angular/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { appRoutingProviders, routing } from './app.routes';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { NewArrivalsComponent } from './new-arrivals/new-arrivals.component';
-import { ShopComponent } from './shop/shop.component';
-import { AboutUsComponent } from './about-us/about-us.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth.service';
 import { UserProfileService } from './services/userProfile/user-profile.service';
+import { CustomerService } from './services/customer/customer.service';
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 import { UserVerificationComponent } from './user-verification/user-verification.component';
+import { CustomerComponent } from './customer/customer.component';
+import { SpecComponent } from './spec/spec.component';
+import { OrderComponent } from './order/order.component';
+import { CustomerViewComponent } from './customer/customer-view.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -39,12 +42,13 @@ export function getAuthServiceConfigs() {
   declarations: [
     AppComponent,
     HomeComponent,
-    NewArrivalsComponent,
-    ShopComponent,
-    AboutUsComponent,
     LoginComponent,
     ComingSoonComponent,
-    UserVerificationComponent
+    UserVerificationComponent,
+    CustomerComponent,
+    SpecComponent,
+    OrderComponent,
+    CustomerViewComponent
   ],
   imports: [
     HttpModule,
@@ -53,7 +57,9 @@ export function getAuthServiceConfigs() {
     routing,
     Angulartics2Module.forRoot([Angulartics2GoogleTagManager]),
     OwlModule,
-    SocialLoginModule
+    SocialLoginModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     appRoutingProviders,
@@ -62,7 +68,8 @@ export function getAuthServiceConfigs() {
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs
     },
-    UserProfileService
+    UserProfileService,
+    CustomerService
   ],
   bootstrap: [AppComponent]
 })

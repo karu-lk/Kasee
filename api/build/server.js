@@ -8,10 +8,10 @@ const express = require("express");
 const helmet = require("helmet");
 const mongoose = require("mongoose");
 const logger = require("morgan");
-const productController_1 = require("./controllers/productController");
-const productCategoryController_1 = require("./controllers/productCategoryController");
-const productImageGalleryController_1 = require("./controllers/productImageGalleryController");
-const stockController_1 = require("./controllers/stockController");
+const customerController_1 = require("./controllers/customerController");
+// import productCategoryController from './controllers/productCategoryController';
+// import productImageGalleryController from './controllers/productImageGalleryController';
+// import stockController from './controllers/stockController';
 const userProfileController_1 = require("./controllers/userProfileController");
 class Server {
     constructor() {
@@ -44,10 +44,10 @@ class Server {
     routes() {
         const router = express.Router();
         this.app.use('/', router);
-        this.app.use('/api/v1/products', productController_1.default);
-        this.app.use('/api/v1/product-categories', productCategoryController_1.default);
-        this.app.use('/api/v1/product-images', productImageGalleryController_1.default);
-        this.app.use('/api/v1/stock', stockController_1.default);
+        this.app.use('/api/v1/customers', customerController_1.default);
+        // this.app.use('/api/v1/product-categories', productCategoryController);
+        // this.app.use('/api/v1/product-images', productImageGalleryController);
+        // this.app.use('/api/v1/stock', stockController);
         this.app.use('/api/v1/users', userProfileController_1.default);
     }
 }

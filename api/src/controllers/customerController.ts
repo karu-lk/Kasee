@@ -1,7 +1,8 @@
 import { Request, Response, Router } from 'express';
-import Product from '../models/Product';
+import Product from '../models/Customer';
+import Customer from '../models/Customer';
 
-export class ProductController {
+export class CustomerController {
     public router: Router;
 
     constructor() {
@@ -11,6 +12,8 @@ export class ProductController {
 
     // get all of the posts in the database
     public all(req: Request, res: Response): void {
+        console.error('----');
+        
         Product.find()
             .then((data) => {
                 
@@ -23,9 +26,9 @@ export class ProductController {
 
     // get a single post by params of 'slug'
     public one(req: Request, res: Response): void {
-        const sku: string = req.params.sku;
+        const customerNumber: string = req.params.customerNumber;
 
-        Product.findOne({ sku })
+        Customer.findOne({ customerNumber })
             .then((data) => {
                 res.status(200).json({ data });
             })
@@ -36,25 +39,27 @@ export class ProductController {
 
     // create a new post
     public create(req: Request, res: Response): void {
-        const id: number = req.body.productId;
-        const sku: string = req.body.sku;
-        const productName: string = req.body.productName;
-        const description: string = req.body.description;
-        const productCategory: string = req.body.productCategory;
+        const customerNumber: string = req.body.customerNumber;
+        const firstName: string = req.body.firstName;
+        const lastName: string = req.body.lastName;
+        const email: string = req.body.email;
+        const mobileNumber: string = req.body.mobileNumber;
+        const identificationComment: string=req.body.identificationComment;
 
-        if (!id || !sku || !productName || description || productCategory) {
-            res.status(422).json({ message: 'All Fields Required.' });
+        if (!customerNumber || !firstName || !lastName) {
+            res.status(422).json({ message: 'Required fields missing.' });
         }
 
-        const newProduct = new Product({
-            id,
-            sku,
-            productName,
-            description,
-            productCategory
+        const newCustomer = new Customer({
+            customerNumber,
+            firstName,
+            lastName,
+            email,
+            mobileNumber,
+            identificationComment
         });
 
-        newProduct.save()
+        newCustomer.save()
             .then((data) => {
                 res.status(201).json({ data });
             })
@@ -65,9 +70,9 @@ export class ProductController {
 
     // update post by params of 'slug'
     public update(req: Request, res: Response): void {
-        const sku: string = req.body.sku;
+        const customerNumber: number = req.body.customerNumber;
 
-        Product.findOneAndUpdate({ sku  }, req.body)
+        Customer.findOneAndUpdate({ customerNumber  }, req.body)
             .then((data) => {
                 res.status(200).json({ data });
             })
@@ -78,9 +83,9 @@ export class ProductController {
 
     // delete post by params of 'slug'
     public delete(req: Request, res: Response): void {
-        const sku: string = req.body.sku;
+        const customerNumber: number = req.body.customerNumber;
 
-        Product.findOneAndRemove({ sku })
+        Customer.findOneAndRemove({ customerNumber })
             .then(() => {
                 res.status(204).end();
             })
@@ -91,14 +96,14 @@ export class ProductController {
 
     public routes() {
         this.router.get('/', this.all);
-        this.router.get('/:sku', this.one);
+        this.router.get('/:customernumber', this.one);
         this.router.post('/', this.create);
-        this.router.put('/:sku', this.update);
-        this.router.delete('/:sku', this.delete);
+        this.router.put('/:customernumber', this.update);
+        this.router.delete('/:customernumber', this.delete);
     }
 }
 
-const productController = new ProductController();
-productController.routes();
+const customerController = new CustomerController();
+customerController.routes();
 
-export default productController.router;
+export default customerController.router;
