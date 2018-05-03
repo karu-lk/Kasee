@@ -9,7 +9,12 @@
       <th>Comments</th>
     </tr>
     <tr *ngFor='let customer of customers'>
+      <td>{{customer.customerNumber}}</td>
+      <td>{{customer.firstName}}</td>
+      <td>{{customer.lastName}}</td>
       <td>{{customer.email}}</td>
+      <td>{{customer.mobileNumber}}</td>
+      <td>{{customer.comments}}</td>
     </tr>
   </table>
 </div>

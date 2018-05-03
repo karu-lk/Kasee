@@ -20,9 +20,9 @@ export class CustomerViewComponent implements OnInit {
   private _self = this;
   loadCustomers() {
     let _self = this;
-    this.customerService.loadCustomers().then(function (result: Response) {
+    this.customerService.loadCustomers().then(function (result:Response) {
       console.log(result);
-      _self.customers = result;
+      _self.customers = result.data;
     });
   }
 }
