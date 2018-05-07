@@ -12,11 +12,9 @@ export class CustomerController {
 
     // get all of the posts in the database
     public all(req: Request, res: Response): void {
-        console.error('----');
-        
         Product.find()
             .then((data) => {
-                
+                console.error('----', { data: data });
                 res.status(200).json({ data });
             })
             .catch((error) => {
@@ -44,7 +42,7 @@ export class CustomerController {
         const lastName: string = req.body.lastName;
         const email: string = req.body.email;
         const mobileNumber: string = req.body.mobileNumber;
-        const identificationComment: string=req.body.identificationComment;
+        const identificationComment: string = req.body.identificationComment;
 
         if (!customerNumber || !firstName || !lastName) {
             res.status(422).json({ message: 'Required fields missing.' });
@@ -72,7 +70,7 @@ export class CustomerController {
     public update(req: Request, res: Response): void {
         const customerNumber: number = req.body.customerNumber;
 
-        Customer.findOneAndUpdate({ customerNumber  }, req.body)
+        Customer.findOneAndUpdate({ customerNumber }, req.body)
             .then((data) => {
                 res.status(200).json({ data });
             })

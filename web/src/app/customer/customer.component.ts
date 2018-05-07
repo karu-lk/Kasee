@@ -28,10 +28,10 @@ export class CustomerComponent implements OnInit {
   submitCustomer() {
     console.log(this.customerForm.value);
     let _self = this;
-    this.customerService.createCustomer(this.customerForm.value).then(function (result: Response) {
-      if (result.status == 201) {
-        _self.router.navigate(['/customer-view']);
-      }
-    });
+    // this.customerService.createCustomer(this.customerForm.value).then(function (result: Response) {
+    //   if (result.status == 201) {
+    //     _self.router.navigate(['/customer-view']);
+    //   }
+    // });
   }
 }
