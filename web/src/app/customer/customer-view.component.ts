@@ -17,20 +17,23 @@ export class CustomerViewComponent implements OnInit {
     this.loadCustomers();
   }
 
-  public customers: ICustomer[];
+  public customers: ICustomer;
+  public data: ICustomer[];
   private _self = this;
+
   loadCustomers() {
     let _self = this;
     console.log('starting load customers...');
 
+
     this.customerService.getCustomers().subscribe(
       res => {
-        console.log(JSON.stringify(res));
+        console.log('----' + JSON.stringify(res));
         // res.forEach(element => {
         //   console.log('res is' + JSON.stringify(element));
         // });
 
-        _self.customers = res;
+        _self.data = res;
       });
 
     // this.customerService.loadCustomers().then(function (result:Response) {

@@ -28,7 +28,7 @@ export class CustomerService {
     let res: Observable<ICustomer[]>;
 
     //res = this.http.get<ICustomer[]>(baseUrl + 'customers');
-    res = this.http.get(baseUrl + 'customers').map(res=>res.data as ICustomer[] || []);
+    res = this.http.get(baseUrl + 'customers').map(res=> <ICustomer[]>res);
     return res;
   }
 }
