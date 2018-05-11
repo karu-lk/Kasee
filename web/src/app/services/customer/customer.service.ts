@@ -11,24 +11,16 @@ let baseUrl = "http://localhost:3001/api/v1/";
 export class CustomerService {
   constructor(private http: HttpClient) { }
 
-  createCustomer(newCustomer) {
-    // return new Promise((resolve, reject) => {
-    //   let headers = new Headers();
-    //   this.http.post(baseUrl + 'customers', newCustomer, { headers: headers })
-    //     .subscribe(res => {
-    //       console.log('res at customer service ' + JSON.stringify(res.json()));
-    //       resolve(res);
-    //     }, (err) => {
-    //       reject(err);
-    //     });
-    // });
+  createCustomer(newCustomer):any {
+      let headers = new Headers();
+      return this.http.post(baseUrl + 'customers', newCustomer);
   }
 
-  public getCustomers(): Observable<ICustomer[]> {
-    let res: Observable<ICustomer[]>;
+  public getCustomers(): Observable<any> {
+    let res: Observable<ICustomer>;
 
-    //res = this.http.get<ICustomer[]>(baseUrl + 'customers');
-    res = this.http.get(baseUrl + 'customers').map(res=> <ICustomer[]>res);
+    res = this.http.get<ICustomer>(baseUrl + 'customers');
+    // res = this.http.get(baseUrl + 'customers').map(res=> <ICustomer[]>res);
     return res;
   }
 }

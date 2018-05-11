@@ -13,9 +13,9 @@ export class CustomerController {
     // get all of the posts in the database
     public all(req: Request, res: Response): void {
         Product.find()
-            .then((data) => {
-                console.error('----', { data: data });
-                res.status(200).json({ data });
+            .then((result) => {
+                console.log(result);
+                res.status(200).json({ result });
             })
             .catch((error) => {
                 res.json({ error });
