@@ -1,8 +1,8 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { CustomerComponent } from './customer/customer.component';
-import { CustomerViewComponent } from './customer/customer-view.component';
+import { CustomerModifyComponent } from './customer/customer-modify.component';
+import { CustomerListComponent } from './customer/customer-list.component';
 import { SpecComponent } from './spec/spec.component';
 import { OrderComponent } from './order/order.component';
 import { LoginComponent } from './login/login.component';
@@ -11,8 +11,8 @@ import { UserVerificationComponent } from './user-verification/user-verification
 
 const appRoutes: Routes = [
     { path: 'home', component: HomeComponent },
-    { path: 'customer', component: CustomerComponent },
-    { path: 'customer-view', component: CustomerViewComponent },
+    { path: 'customer-modify', component: CustomerModifyComponent },
+    { path: 'customer-list', component: CustomerListComponent },
     { path: 'spec', component: SpecComponent },
     { path: 'login', component: LoginComponent },
     { path: 'order', component: OrderComponent },

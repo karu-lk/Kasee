@@ -18,10 +18,10 @@ import { UserProfileService } from './services/userProfile/user-profile.service'
 import { CustomerService } from './services/customer/customer.service';
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 import { UserVerificationComponent } from './user-verification/user-verification.component';
-import { CustomerComponent } from './customer/customer.component';
+import { CustomerModifyComponent } from './customer/customer-modify.component';
 import { SpecComponent } from './spec/spec.component';
 import { OrderComponent } from './order/order.component';
-import { CustomerViewComponent } from './customer/customer-view.component';
+import { CustomerListComponent } from './customer/customer-list.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -46,10 +46,10 @@ export function getAuthServiceConfigs() {
     LoginComponent,
     ComingSoonComponent,
     UserVerificationComponent,
-    CustomerComponent,
+    CustomerModifyComponent,
     SpecComponent,
     OrderComponent,
-    CustomerViewComponent
+    CustomerListComponent
   ],
   imports: [
     //HttpModule,

@@ -1,3 +1,6 @@
+<div class="list-toolbar">
+  <button class="btn btn-outline-warning" type="button" [routerLink]="['/customer-modify']">ADD NEW</button>
+</div>
 <div class="customer-view-container">
   <table class="table">
     <tr>
@@ -7,6 +10,7 @@
       <th>Email</th>
       <th>Mobile Number</th>
       <th>Comments</th>
+      <th></th>
     </tr>
     <tr *ngFor='let customer of data'>
       <td>{{customer.customerNumber}}</td>
@@ -15,6 +19,7 @@
       <td>{{customer.email}}</td>
       <td>{{customer.mobileNumber}}</td>
       <td>{{customer.comments}}</td>
+      <td><button type="button" class="btn btn-sm btn-outline-info" (click)="editCustomer(customer.customerNumber)">EDIT</button></td>
     </tr>
   </table>
 </div>

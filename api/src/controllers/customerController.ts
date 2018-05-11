@@ -14,7 +14,7 @@ export class CustomerController {
     public all(req: Request, res: Response): void {
         Product.find()
             .then((result) => {
-                console.log(result);
+                //console.log(result);
                 res.status(200).json({ result });
             })
             .catch((error) => {
@@ -24,7 +24,7 @@ export class CustomerController {
 
     // get a single post by params of 'slug'
     public one(req: Request, res: Response): void {
-        const customerNumber: string = req.params.customerNumber;
+        const customerNumber: string = req.params['customernumber'];
 
         Customer.findOne({ customerNumber })
             .then((data) => {

@@ -5,11 +5,11 @@ import { Response } from '@angular/http';
 import { ICustomer } from '../models/ICustomer';
 
 @Component({
-  selector: 'app-customer-view',
-  templateUrl: './customer-view.component.html',
-  styleUrls: ['./customer-view.component.css']
+  selector: 'app-customer-list',
+  templateUrl: './customer-list.component.html',
+  styleUrls: ['./customer-list.component.css']
 })
-export class CustomerViewComponent implements OnInit {
+export class CustomerListComponent implements OnInit {
 
   constructor(private customerService: CustomerService, private router: Router) { }
 
@@ -23,12 +23,17 @@ export class CustomerViewComponent implements OnInit {
 
   loadCustomers() {
     let _self = this;
-    console.log('starting load customers...');
+    //console.log('starting load customers...');
 
     this.customerService.getCustomers().subscribe(
       res => {
-        console.log('----' + JSON.stringify(res.result));
+        //console.log('----' + JSON.stringify(res.result));
         _self.data = res.result;
       });
+  }
+
+  editCustomer(customerNo){
+    console.log(customerNo);
+    this.router.navigate(['/customer-modify'], { queryParams: { "customerNo": customerNo } });
   }
 }

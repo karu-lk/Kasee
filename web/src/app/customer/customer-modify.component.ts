@@ -1,19 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CustomerService } from '../services/customer/customer.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
 @Component({
   selector: 'app-customer',
-  templateUrl: './customer.component.html',
-  styleUrls: ['./customer.component.css']
+  templateUrl: './customer-modify.component.html',
+  styleUrls: ['./customer-modify.component.css']
 })
-export class CustomerComponent implements OnInit {
+export class CustomerModifyComponent implements OnInit {
+  customerNoForEdit: string;
 
-  constructor(private customerService: CustomerService, private router: Router) { }
+  constructor(private customerService: CustomerService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.customerNoForEdit = params.customerNo;
+    });
+
+    this.loadCustomerForEdit(this.customerNoForEdit);
   }
 
   customerForm = new FormGroup({
@@ -26,7 +32,7 @@ export class CustomerComponent implements OnInit {
   })
 
   submitCustomer() {
-    console.log(this.customerForm.value);
+    //console.log(this.customerForm.value);
     let _self = this;
     this.customerService.createCustomer(this.customerForm.value)
       .subscribe(res => {
@@ -36,6 +42,15 @@ export class CustomerComponent implements OnInit {
         }
       }, (err) => {
         console.log(err);
+      });
+  }
+
+  loadCustomerForEdit(customerNumber) {
+    this.customerService.getCustomer(customerNumber).subscribe(
+      res => {
+        console.log('----' + JSON.stringify(res));
+        //_self.data = res.result;
+        //this.customerForm = res.data;
       });
   }
 }

@@ -2362,3 +2362,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
     margin: 10px 30px 10px 30px;
     padding: 10px 30px 10px 30px;
   }
+
+  .list-toolbar{
+    padding: 8px 0 6px 0;
+  }
