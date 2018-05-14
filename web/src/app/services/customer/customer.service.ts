@@ -16,6 +16,17 @@ export class CustomerService {
     return this.http.post(baseUrl + 'customers', newCustomer);
   }
 
+  updateCustomer(modifiedCustomer): any {
+    let headers = new Headers();
+    console.log('----' + JSON.stringify(modifiedCustomer));
+    return this.http.put(baseUrl + 'customers/' + modifiedCustomer.customerNumber, modifiedCustomer);
+  }
+
+  deleteCustomer(deletedCustomerNumber) {
+    let headers = new Headers();
+    return this.http.delete(baseUrl + 'customers/' + deletedCustomerNumber);
+  }
+
   public getCustomers(): Observable<any> {
     let res: Observable<ICustomer>;
 

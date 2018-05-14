@@ -39,7 +39,6 @@ export class CustomerDetailsComponent implements OnInit {
     if (this.addNewFlag) {//ADD NEW
       this.customerService.createCustomer(this.customerForm.value)
         .subscribe(res => {
-          console.log('res at customer service ' + JSON.stringify(res));
           if (res) {
             _self.router.navigate(['/customer-list']);
           }
@@ -47,7 +46,15 @@ export class CustomerDetailsComponent implements OnInit {
           console.log(err);
         });
     } else {//MODIFY
-
+      console.log('@@@@'+JSON.stringify(this.customerForm.value));
+      this.customerService.updateCustomer(this.customerForm.value)
+        .subscribe(res => {
+          if (res) {
+            _self.router.navigate(['/customer-list']);
+          }
+        }, (err) => {
+          console.log(err);
+        });
     }
   }
 
@@ -55,8 +62,6 @@ export class CustomerDetailsComponent implements OnInit {
     if (customerNumber) {
       this.customerService.getCustomer(customerNumber).subscribe(
         res => {
-          console.log('----' + JSON.stringify(res));
-          //_self.data = res.result;
           this.customerForm.patchValue(res.data);
         });
     }
@@ -76,6 +81,15 @@ export class CustomerDetailsComponent implements OnInit {
 
   cancelCustomerClick() {
     this.router.navigate(['/customer-list']);
+  }
+
+  deleteCustomerClick(){
+    if(this.customerForm.controls.customerNumber.value){
+      this.customerService.deleteCustomer(this.customerForm.controls.customerNumber.value).subscribe(
+        res => {
+          this.router.navigate(['/customer-list']);
+        });
+    }
   }
 
   disableControls(controlStatus: boolean) {

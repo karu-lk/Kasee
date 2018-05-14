@@ -23,17 +23,13 @@ export class CustomerListComponent implements OnInit {
 
   loadCustomers() {
     let _self = this;
-    //console.log('starting load customers...');
-
     this.customerService.getCustomers().subscribe(
       res => {
-        //console.log('----' + JSON.stringify(res.result));
         _self.data = res.result;
       });
   }
 
   editCustomer(customerNo){
-    console.log(customerNo);
     this.router.navigate(['/customer-details'], { queryParams: { "customerNo": customerNo } });
   }
 }
