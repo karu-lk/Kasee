@@ -36,15 +36,19 @@ export class CustomerDetailsComponent implements OnInit {
 
   submitCustomer() {
     let _self = this;
-    this.customerService.createCustomer(this.customerForm.value)
-      .subscribe(res => {
-        console.log('res at customer service ' + JSON.stringify(res));
-        if (res) {
-          _self.router.navigate(['/customer-list']);
-        }
-      }, (err) => {
-        console.log(err);
-      });
+    if (this.addNewFlag) {//ADD NEW
+      this.customerService.createCustomer(this.customerForm.value)
+        .subscribe(res => {
+          console.log('res at customer service ' + JSON.stringify(res));
+          if (res) {
+            _self.router.navigate(['/customer-list']);
+          }
+        }, (err) => {
+          console.log(err);
+        });
+    } else {//MODIFY
+
+    }
   }
 
   loadCustomerForEdit(customerNumber) {
