@@ -2359,7 +2359,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
   .customer-form{
     width: 45%;
-    margin: 10px 30px 10px 30px;
+    margin: 10px 30px 10px 0;
     padding: 10px 30px 10px 30px;
   }
 
