@@ -18,7 +18,6 @@ export class CustomerService {
 
   updateCustomer(modifiedCustomer): any {
     let headers = new Headers();
-    console.log('----' + JSON.stringify(modifiedCustomer));
     return this.http.put(baseUrl + 'customers/' + modifiedCustomer.customerNumber, modifiedCustomer);
   }
 

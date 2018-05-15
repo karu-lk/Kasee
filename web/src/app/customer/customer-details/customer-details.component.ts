@@ -46,8 +46,7 @@ export class CustomerDetailsComponent implements OnInit {
           console.log(err);
         });
     } else {//MODIFY
-      console.log('@@@@'+JSON.stringify(this.customerForm.value));
-      this.customerService.updateCustomer(this.customerForm.value)
+      this.customerService.updateCustomer(this.customerForm.getRawValue())
         .subscribe(res => {
           if (res) {
             _self.router.navigate(['/customer-list']);
