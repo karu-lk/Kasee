@@ -18,9 +18,15 @@ export class CustomerDetailsComponent implements OnInit {
   ngOnInit() {
     this.disableControls(true);
     this.route.queryParams.subscribe(params => {
-      this.customerNoForEdit = params.customerNo;
-
-      this.loadCustomerForEdit(this.customerNoForEdit);
+      if (params.mode && params.mode === "new") {
+        this.disableControls(false);
+        this.customerForm.reset();
+        this.addNewFlag = true;
+      }
+      else {
+        this.customerNoForEdit = params.customerNo;
+        this.loadCustomerForEdit(this.customerNoForEdit);
+      }
     });
 
   }
@@ -70,6 +76,9 @@ export class CustomerDetailsComponent implements OnInit {
     this.disableControls(false);
     this.customerForm.reset();
     this.addNewFlag = true;
+    this.customerForm.controls.customerNumber.disable();
+    this.customerForm.controls.customerNumber.disable();
+
   }
 
   editCustomerClick() {
@@ -82,8 +91,8 @@ export class CustomerDetailsComponent implements OnInit {
     this.router.navigate(['/customer-list']);
   }
 
-  deleteCustomerClick(){
-    if(this.customerForm.controls.customerNumber.value){
+  deleteCustomerClick() {
+    if (this.customerForm.controls.customerNumber.value) {
       this.customerService.deleteCustomer(this.customerForm.controls.customerNumber.value).subscribe(
         res => {
           this.router.navigate(['/customer-list']);

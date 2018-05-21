@@ -11,6 +11,10 @@ let baseUrl = "http://localhost:3001/api/v1/";
 export class CustomerService {
   constructor(private http: HttpClient) { }
 
+  AddFunction(){
+    //TEST
+  }
+
   createCustomer(newCustomer): any {
     let headers = new Headers();
     return this.http.post(baseUrl + 'customers', newCustomer);

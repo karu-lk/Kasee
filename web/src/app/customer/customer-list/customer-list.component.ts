@@ -32,4 +32,8 @@ export class CustomerListComponent implements OnInit {
   editCustomer(customerNo){
     this.router.navigate(['/customer-details'], { queryParams: { "customerNo": customerNo } });
   }
+
+  addCustomer(){
+    this.router.navigate(['/customer-details'], { queryParams: { "mode": "new" } });
+  }
 }
