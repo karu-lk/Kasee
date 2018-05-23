@@ -1,3 +1,88 @@
-<p>
-  spec-details works!
-</p>
+<div class="list-toolbar">
+  <button class="btn btn-outline-warning" type="button" (click)="addNewCustomerClick()">ADD NEW</button>
+  <button class="btn btn-outline-warning" type="button" (click)="editCustomerClick()">EDIT</button>
+  <button class="btn btn-outline-danger" type="button" (click)="deleteCustomerClick()">DELETE</button>
+  <button class="btn btn-outline-danger" type="button" (click)="cancelCustomerClick()">CANCEL</button>
+</div>
+<div class="customer-form border border-info">
+  <form [formGroup]="specForm" (ngSubmit)="submitCustomer()">
+    <div class="form-group">
+      <label for="customerNumber">Customer Number</label>
+      <input type="text" class="form-control" id="customerNumber" aria-describedby="emailHelp" placeholder="Customer Number (A-Z, a-z, 0-9)"
+        required maxlength="12" formControlName="customerNumber">
+    </div>
+    <div class="form-group">
+      <label for="firstName">Customer Name</label>
+      <input type="text" class="form-control" id="firstName" placeholder="Customer name" required maxlength="45" formControlName="name">
+    </div>
+    <div class="form-group">
+      <label for="shoulder">Shoulder</label>
+      <input type="text" class="form-control" id="shoulder" placeholder="Shoulder" required maxlength="45" formControlName="shoulder">
+    </div>
+    <div class="form-group">
+      <label for="shoulderToBust">ShoulderToBust</label>
+      <input type="text" class="form-control" id="shoulderToBust" placeholder="ShoulderToBust" required maxlength="45" formControlName="shoulderToBust">
+    </div>
+    <div class="form-group">
+      <label for="shoulderToWaist">ShoulderToWaist</label>
+      <input type="text" class="form-control" id="shoulderToWaist" placeholder="ShoulderToWaist" required maxlength="45" formControlName="shoulderToWaist">
+    </div>
+    <div class="form-group">
+      <label for="shoulderToBracut">ShoulderToBracut</label>
+      <input type="text" class="form-control" id="shoulderToBracut" placeholder="ShoulderToBracut" required maxlength="45" formControlName="shoulderToBracut">
+    </div>
+    <div class="form-group">
+      <label for="bust">Bust</label>
+      <input type="text" class="form-control" id="bust" placeholder="Bust" required maxlength="45" formControlName="bust">
+    </div>
+    <div class="form-group">
+      <label for="blouseWaist">BlouseWaist</label>
+      <input type="text" class="form-control" id="blouseWaist" placeholder="BlouseWaist" required maxlength="45" formControlName="blouseWaist">
+    </div>
+    <div class="form-group">
+      <label for="bracut">Bracut</label>
+      <input type="text" class="form-control" id="bracut" placeholder="Bracut" required maxlength="45" formControlName="bracut">
+    </div>
+    <div class="form-group">
+      <label for="frontNeck">FrontNeck</label>
+      <input type="text" class="form-control" id="frontNeck" placeholder="FrontNeck" required maxlength="45" formControlName="frontNeck">
+    </div>
+    <div class="form-group">
+      <label for="backNeck">BackNeck</label>
+      <input type="text" class="form-control" id="backNeck" placeholder="BackNeck" required maxlength="45" formControlName="backNeck">
+    </div>
+    <div class="form-group">
+      <label for="lengthBack">LengthBack</label>
+      <input type="text" class="form-control" id="lengthBack" placeholder="LengthBack" required maxlength="45" formControlName="lengthBack">
+    </div>
+    <div class="form-group">
+      <label for="sleaveLength">SleaveLength</label>
+      <input type="text" class="form-control" id="sleaveLength" placeholder="SleaveLength" required maxlength="45" formControlName="sleaveLength">
+    </div>
+    <div class="form-group">
+      <label for="sleaveWidth">SleaveWidth</label>
+      <input type="text" class="form-control" id="sleaveWidth" placeholder="SleaveWidth" required maxlength="45" formControlName="sleaveWidth">
+    </div>
+    <div class="form-group">
+      <label for="armCut">ArmCut</label>
+      <input type="text" class="form-control" id="armCut" placeholder="ArmCut" required maxlength="45" formControlName="armCut">
+    </div>
+    <div class="form-group">
+      <label for="armPit">ArmPit</label>
+      <input type="text" class="form-control" id="armPit" placeholder="ArmPit" required maxlength="45" formControlName="armPit">
+    </div>
+    <div class="form-group">
+      <label for="underskirtWaist">UnderskirtWaist</label>
+      <input type="text" class="form-control" id="underskirtWaist" placeholder="UnderskirtWaist" required maxlength="45" formControlName="underskirtWaist">
+    </div>
+    <div class="form-group">
+      <label for="underskirtHip">UnderskirtHip</label>
+      <input type="text" class="form-control" id="underskirtHip" placeholder="UnderskirtHip" required maxlength="45" formControlName="underskirtHip">
+    </div>
+    <div class="form-group">
+      <label for="underskirtLength">UnderskirtLength</label>
+      <input type="text" class="form-control" id="underskirtLength" placeholder="UnderskirtLength" required maxlength="45" formControlName="underskirtLength">
+    </div>
+    <button class="btn btn-primary" [disabled]="false">Submit</button>
+  </form>
+</div>

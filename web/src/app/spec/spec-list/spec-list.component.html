@@ -1,3 +1,19 @@
-<p>
-  spec-list works!
-</p>
+<div class="list-toolbar">
+  <button class="btn btn-outline-warning" type="button" (click)="addSpec()">ADD NEW</button>
+</div>
+<div class="customer-view-container">
+  <table class="table">
+    <tr>
+      <th>Customer Number</th>
+      <th>Name</th>
+      <th>Mobile Number</th>
+      <th></th>
+    </tr>
+    <tr *ngFor='let spec of specs'>
+      <td>{{spec.customerNumber}}</td>
+      <td>{{spec.name}}</td>
+      <td>{{spec.mobileNumber}}</td>
+      <td><button type="button" class="btn btn-sm btn-outline-info" (click)="viewSpec(spec.specNumber)">VIEW</button></td>
+    </tr>
+  </table>
+</div>

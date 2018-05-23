@@ -1,0 +1,20 @@
+export interface ISpec {
+    customerNumber: string;
+    Shoulder: number;
+    ShoulderToBust: number;
+    ShoulderToWaist: number;
+    ShoulderToBracut: number;
+    Bust: number;
+    BlouseWaist: number;
+    Bracut: number;
+    FrontNeck: number;
+    backNeck: number;
+    LengthBack: number;
+    SleaveLength: number;
+    SleaveWidth: number;
+    ArmCut: number;
+    ArmPit: number;
+    UnderskirtWaist: number;
+    UnderskirtHip: number;
+    UnderskirtLength: number;
+};
