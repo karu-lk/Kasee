@@ -9,6 +9,7 @@ const helmet = require("helmet");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const customerController_1 = require("./controllers/customerController");
+const specController_1 = require("./controllers/specController");
 // import productCategoryController from './controllers/productCategoryController';
 // import productImageGalleryController from './controllers/productImageGalleryController';
 // import stockController from './controllers/stockController';
@@ -45,6 +46,7 @@ class Server {
         const router = express.Router();
         this.app.use('/', router);
         this.app.use('/api/v1/customers', customerController_1.default);
+        this.app.use('/api/v1/specifications', specController_1.default);
         // this.app.use('/api/v1/product-categories', productCategoryController);
         // this.app.use('/api/v1/product-images', productImageGalleryController);
         // this.app.use('/api/v1/stock', stockController);

@@ -9,6 +9,7 @@ import * as logger from 'morgan';
 import * as path from 'path';
 
 import customerController from './controllers/customerController';
+import specController from './controllers/specController';
 // import productCategoryController from './controllers/productCategoryController';
 // import productImageGalleryController from './controllers/productImageGalleryController';
 // import stockController from './controllers/stockController';
@@ -56,6 +57,7 @@ class Server {
 
     this.app.use('/', router);
     this.app.use('/api/v1/customers', customerController);
+    this.app.use('/api/v1/specifications', specController);
     // this.app.use('/api/v1/product-categories', productCategoryController);
     // this.app.use('/api/v1/product-images', productImageGalleryController);
     // this.app.use('/api/v1/stock', stockController);

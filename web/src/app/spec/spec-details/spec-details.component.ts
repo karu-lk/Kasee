@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { CustomerService } from '../../services/customer/customer.service';
+import { SpecService } from '../../services/specification/spec.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
@@ -12,7 +12,7 @@ import { Response } from '@angular/http';
 export class SpecDetailsComponent implements OnInit {
   addNewFlag: boolean = false;
 
-  constructor(private customerService: CustomerService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private specService: SpecService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.disableControls(true);
@@ -54,7 +54,7 @@ export class SpecDetailsComponent implements OnInit {
   submitCustomer() {
     let _self = this;
     if (this.addNewFlag) {//ADD NEW
-      this.customerService.createCustomer(this.specForm.value)
+      this.specService.createSpec(this.specForm.value)
         .subscribe(res => {
           if (res) {
             _self.router.navigate(['/customer-list']);
@@ -63,7 +63,7 @@ export class SpecDetailsComponent implements OnInit {
           console.log(err);
         });
     } else {//MODIFY
-      this.customerService.updateCustomer(this.specForm.getRawValue())
+      this.specService.updateSpec(this.specForm.getRawValue())
         .subscribe(res => {
           if (res) {
             _self.router.navigate(['/customer-list']);
@@ -76,7 +76,7 @@ export class SpecDetailsComponent implements OnInit {
 
   loadCustomerForEdit(customerNumber) {
     if (customerNumber) {
-      this.customerService.getCustomer(customerNumber).subscribe(
+      this.specService.getSpec(customerNumber).subscribe(
         res => {
           this.specForm.patchValue(res.data);
         });
@@ -104,7 +104,7 @@ export class SpecDetailsComponent implements OnInit {
 
   deleteCustomerClick() {
     if (this.specForm.controls.customerNumber.value) {
-      this.customerService.deleteCustomer(this.specForm.controls.customerNumber.value).subscribe(
+      this.specService.deleteSpec(this.specForm.controls.customerNumber.value).subscribe(
         res => {
           this.router.navigate(['/customer-list']);
         });

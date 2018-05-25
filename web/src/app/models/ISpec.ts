@@ -8,7 +8,7 @@ export interface ISpec {
     BlouseWaist: number;
     Bracut: number;
     FrontNeck: number;
-    backNeck: number;
+    BackNeck: number;
     LengthBack: number;
     SleaveLength: number;
     SleaveWidth: number;
