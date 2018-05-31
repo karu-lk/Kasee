@@ -21,6 +21,7 @@ import { UserVerificationComponent } from './user-verification/user-verification
 import { CustomerDetailsComponent } from './customer/customer-details/customer-details.component';
 import { OrderComponent } from './order/order.component';
 import { CustomerListComponent } from './customer/customer-list/customer-list.component';
+import { SpecService } from './services/specification/spec.service';
 import { SpecListComponent } from './spec/spec-list/spec-list.component';
 import { SpecDetailsComponent } from './spec/spec-details/spec-details.component';
 
@@ -73,7 +74,8 @@ export function getAuthServiceConfigs() {
       useFactory: getAuthServiceConfigs
     },
     UserProfileService,
-    CustomerService
+    CustomerService,
+    SpecService
   ],
   bootstrap: [AppComponent]
 })

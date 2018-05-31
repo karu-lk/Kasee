@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { SpecService } from '../../services/specification/spec.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
+import { CustomerService } from '../../services/customer/customer.service';
 
 @Component({
   selector: 'app-spec-details',
@@ -11,10 +12,14 @@ import { Response } from '@angular/http';
 })
 export class SpecDetailsComponent implements OnInit {
   addNewFlag: boolean = false;
+  customerNoForSpec;
+  customerList;
 
-  constructor(private specService: SpecService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private specService: SpecService, private customerService: CustomerService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.loadCustomers();
+
     this.disableControls(true);
     this.route.queryParams.subscribe(params => {
       if (params.mode && params.mode === "new") {
@@ -23,15 +28,15 @@ export class SpecDetailsComponent implements OnInit {
         this.addNewFlag = true;
       }
       else {
-        // this.customerNoForEdit = params.customerNo;
-        // this.loadCustomerForEdit(this.customerNoForEdit);
+        this.customerNoForSpec = params.customerNumber;
+        this.loadCustomerSpec(this.customerNoForSpec);
       }
     });
   }
 
   specForm = new FormGroup({
     customerNumber: new FormControl({ value: '', disabled: this.disableControls }),
-    name: new FormControl({ value: '', disabled: this.disableControls }),
+    customerName: new FormControl({ value: '', disabled: this.disableControls }),
     shoulder: new FormControl({ value: '', disabled: this.disableControls }),
     shoulderToBust: new FormControl({ value: '', disabled: this.disableControls }),
     shoulderToWaist: new FormControl({ value: '', disabled: this.disableControls }),
@@ -57,7 +62,7 @@ export class SpecDetailsComponent implements OnInit {
       this.specService.createSpec(this.specForm.value)
         .subscribe(res => {
           if (res) {
-            _self.router.navigate(['/customer-list']);
+            _self.router.navigate(['/spec-list']);
           }
         }, (err) => {
           console.log(err);
@@ -66,7 +71,7 @@ export class SpecDetailsComponent implements OnInit {
       this.specService.updateSpec(this.specForm.getRawValue())
         .subscribe(res => {
           if (res) {
-            _self.router.navigate(['/customer-list']);
+            _self.router.navigate(['/spec-list']);
           }
         }, (err) => {
           console.log(err);
@@ -74,13 +79,30 @@ export class SpecDetailsComponent implements OnInit {
     }
   }
 
-  loadCustomerForEdit(customerNumber) {
+  loadCustomerSpec(customerNumber) {
     if (customerNumber) {
       this.specService.getSpec(customerNumber).subscribe(
         res => {
           this.specForm.patchValue(res.data);
+          console.error('!!!!', res.data['customerNumber']);
+          this.specForm.controls['customerName'].setValue(res.data['customerNumber'], { onlySelf: true });
         });
     }
+  }
+
+  loadCustomers() {
+    let _self = this;
+    let enhancedCustomerList: any[] = [];
+    let enhancedCustomer;
+
+    this.customerService.getCustomers().subscribe(
+      res => {
+        res.result.forEach(element => {
+          enhancedCustomer = { "customerNumber": element.customerNumber, "customerName": element.firstName + ' ' + element.lastName };
+          enhancedCustomerList.push(enhancedCustomer);
+        });
+        _self.customerList = enhancedCustomerList;
+      });
   }
 
   addNewCustomerClick() {
@@ -88,25 +110,28 @@ export class SpecDetailsComponent implements OnInit {
     this.specForm.reset();
     this.addNewFlag = true;
     this.specForm.controls.customerNumber.disable();
-    this.specForm.controls.customerNumber.disable();
-
   }
 
   editCustomerClick() {
     this.disableControls(false);
     this.specForm.controls.customerNumber.disable();
+    this.specForm.controls.customerName.disable();
     this.addNewFlag = false;
   }
 
+  customerNameChange(){
+    console.log('clicked');
+  }
+
   cancelCustomerClick() {
-    this.router.navigate(['/customer-list']);
+    this.router.navigate(['/spec-list']);
   }
 
   deleteCustomerClick() {
     if (this.specForm.controls.customerNumber.value) {
       this.specService.deleteSpec(this.specForm.controls.customerNumber.value).subscribe(
         res => {
-          this.router.navigate(['/customer-list']);
+          this.router.navigate(['/spec-list']);
         });
     }
   }
@@ -114,7 +139,7 @@ export class SpecDetailsComponent implements OnInit {
   disableControls(controlStatus: boolean) {
     if (controlStatus) {
       this.specForm.controls.customerNumber.disable();
-      this.specForm.controls.name.disable();
+      this.specForm.controls.customerName.disable();
       this.specForm.controls.shoulder.disable();
       this.specForm.controls.shoulderToBust.disable();
       this.specForm.controls.shoulderToWaist.disable();
@@ -134,7 +159,7 @@ export class SpecDetailsComponent implements OnInit {
       this.specForm.controls.underskirtLength.disable();
     } else {
       this.specForm.controls.customerNumber.enable();
-      this.specForm.controls.name.enable();
+      this.specForm.controls.customerName.enable();
       this.specForm.controls.shoulder.enable();
       this.specForm.controls.shoulderToBust.enable();
       this.specForm.controls.shoulderToWaist.enable();

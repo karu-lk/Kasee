@@ -18,7 +18,7 @@ export class SpecListComponent implements OnInit {
     this.loadCustomers();
   }
   
-  public specs: ISpec[];
+  public specs:any;
   private _self = this;
 
   loadCustomers() {
@@ -29,8 +29,8 @@ export class SpecListComponent implements OnInit {
       });
   }
 
-  viewSpec(specNumber) {
-    this.router.navigate(['/spec-details'], { queryParams: { "specNumber": specNumber } });
+  viewSpec(customerNumber) {
+    this.router.navigate(['/spec-details'], { queryParams: { "customerNumber": customerNumber } });
   }
 
   addSpec() {

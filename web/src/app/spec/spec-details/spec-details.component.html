@@ -12,8 +12,10 @@
         required maxlength="12" formControlName="customerNumber">
     </div>
     <div class="form-group">
-      <label for="firstName">Customer Name</label>
-      <input type="text" class="form-control" id="firstName" placeholder="Customer name" required maxlength="45" formControlName="name">
+      <label for="customerName">Customer Name</label>
+      <select class="dropdown show" name="customerName" formControlName="customerName" (change)="customerNameChange($event.target.value)">
+        <option *ngFor="let customer of customerList" [ngValue]="customer.customerNumber">{{customer.customerName}}</option>
+      </select>
     </div>
     <div class="form-group">
       <label for="shoulder">Shoulder</label>
