@@ -35,7 +35,7 @@ export class SpecDetailsComponent implements OnInit {
   }
 
   specForm = new FormGroup({
-    customerNumber: new FormControl({ value: '', disabled: this.disableControls }),
+    customerNumber: new FormControl({ value: '', disabled: true }),
     customerName: new FormControl({ value: '', disabled: this.disableControls }),
     shoulder: new FormControl({ value: '', disabled: this.disableControls }),
     shoulderToBust: new FormControl({ value: '', disabled: this.disableControls }),
@@ -84,7 +84,6 @@ export class SpecDetailsComponent implements OnInit {
       this.specService.getSpec(customerNumber).subscribe(
         res => {
           this.specForm.patchValue(res.data);
-          console.error('!!!!', res.data['customerNumber']);
           this.specForm.controls['customerName'].setValue(res.data['customerNumber'], { onlySelf: true });
         });
     }
@@ -119,8 +118,8 @@ export class SpecDetailsComponent implements OnInit {
     this.addNewFlag = false;
   }
 
-  customerNameChange(){
-    console.log('clicked');
+  customerNameChange(dropDownValue){
+    this.specForm.controls.customerNumber.setValue(dropDownValue);
   }
 
   cancelCustomerClick() {
@@ -138,7 +137,6 @@ export class SpecDetailsComponent implements OnInit {
 
   disableControls(controlStatus: boolean) {
     if (controlStatus) {
-      this.specForm.controls.customerNumber.disable();
       this.specForm.controls.customerName.disable();
       this.specForm.controls.shoulder.disable();
       this.specForm.controls.shoulderToBust.disable();
@@ -158,7 +156,6 @@ export class SpecDetailsComponent implements OnInit {
       this.specForm.controls.underskirtHip.disable();
       this.specForm.controls.underskirtLength.disable();
     } else {
-      this.specForm.controls.customerNumber.enable();
       this.specForm.controls.customerName.enable();
       this.specForm.controls.shoulder.enable();
       this.specForm.controls.shoulderToBust.enable();

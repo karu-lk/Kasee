@@ -35,7 +35,7 @@ export class SpecController {
 
     // create a new post
     public create(req: Request, res: Response): void {
-        const customerNumber: string = req.body.customerNumber;
+        const customerNumber: string = req.body.customerName; //customerName's value is customerNumber
         const shoulder: number = req.body.shoulder;
         const shoulderToBust:number=req.body.shoulderToBust;
         const shoulderToWaist: number = req.body.shoulderToWaist;
@@ -54,7 +54,6 @@ export class SpecController {
         const underskirtHip: number = req.body.underskirtHip;
         const underskirtLength: number = req.body.underskirtLength;
 
-        console.error('!!!', customerNumber);
         if (!customerNumber) {
             res.status(422).json({ message: 'Required fields missing.' });
         }

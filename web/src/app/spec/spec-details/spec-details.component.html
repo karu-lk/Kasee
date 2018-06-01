@@ -9,12 +9,12 @@
     <div class="form-group">
       <label for="customerNumber">Customer Number</label>
       <input type="text" class="form-control" id="customerNumber" aria-describedby="emailHelp" placeholder="Customer Number (A-Z, a-z, 0-9)"
-        required maxlength="12" formControlName="customerNumber">
+        required maxlength="12" formControlName="customerNumber" disabled>
     </div>
     <div class="form-group">
       <label for="customerName">Customer Name</label>
       <select class="dropdown show" name="customerName" formControlName="customerName" (change)="customerNameChange($event.target.value)">
-        <option *ngFor="let customer of customerList" [ngValue]="customer.customerNumber">{{customer.customerName}}</option>
+        <option *ngFor="let customer of customerList" [value]="customer.customerNumber">{{customer.customerName}}</option>
       </select>
     </div>
     <div class="form-group">
