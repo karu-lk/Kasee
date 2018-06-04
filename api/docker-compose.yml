@@ -1,0 +1,18 @@
+version: "3"
+services:
+  api:
+    container_name: kasee-api
+    #image: node:latest
+    restart: always
+    build: .
+    ports:
+      - "3001:80"
+    links:
+      - mongo
+  mongo:
+    container_name: kasee-mongo
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"

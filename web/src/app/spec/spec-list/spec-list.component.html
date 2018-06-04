@@ -9,9 +9,9 @@
       <th>Mobile Number</th>
       <th></th>
     </tr>
-    <tr *ngFor='let spec of specs'>
+    <tr *ngFor='let spec of specList'>
       <td>{{spec.customerNumber}}</td>
-      <td>{{spec.firstName}} {{spec.lastName}}</td>
+      <td>{{spec.customerName}}</td>
       <td>{{spec.mobileNumber}}</td>
       <td><button type="button" class="btn btn-sm btn-outline-info" (click)="viewSpec(spec.customerNumber)">VIEW</button></td>
     </tr>
