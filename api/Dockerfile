@@ -6,8 +6,10 @@ RUN npm install
 COPY . /app
 EXPOSE 3001
 
-#RUN console.log('npm')
+RUN npm --version
+CMD [ "npm", "run", "server" ]
 
-#CMD [ “npm”, “start” ]
-
-RUN npm run server
+# FROM node:8.6 as node
+# WORKDIR /app
+# COPY package.json /app/
+# RUN npm install
