@@ -1,31 +1,18 @@
-FROM node:latest
+# Stage 0, based on Node.js, to build and compile Angular
+FROM node:latest as node
+
 RUN mkdir -p /app
 WORKDIR /app
 COPY package.json /app/
+
 RUN npm install
-COPY . /app
-EXPOSE 3000
 
-CMD [ "npm", "start" ]
+COPY . /app/
 
+RUN npm run build-prod
 
-# # Stage 0, based on Node.js, to build and compile Angular
-# FROM node:8.6 as node
+# Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
+FROM nginx:1.13
 
-# WORKDIR /app
-# COPY package.json /app/
-
-# RUN npm install
-
-# COPY ./ /app/
-# ARG env=prod
-
-# # RUN npm run build -$env
-
-# RUN npm run build-prod
-
-# # Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
-# FROM nginx:1.13
-
-# COPY --from=node /app/dist/ /usr/share/nginx/html
-# COPY ./nginx-custom.conf /etc/nginx/conf.d/default.conf
+COPY --from=node /app/dist/ /usr/share/nginx/html
+COPY ./nginx-custom.conf /etc/nginx/conf.d/default.conf

@@ -3,7 +3,7 @@ services:
   api:
     container_name: kasee-api
     restart: always
-    build: .
+    build: ../api/
     ports:
       - "3001:80"
     links:

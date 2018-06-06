@@ -1,12 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Angulartics2Module } from 'angulartics2';
-import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
 import { OwlModule } from 'ngx-owl-carousel';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, } from "angular5-social-login";
 //import { HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { appRoutingProviders, routing } from './app.routes';
@@ -60,7 +58,6 @@ export function getAuthServiceConfigs() {
     HttpClientModule,
     RouterModule,
     routing,
-    Angulartics2Module.forRoot([Angulartics2GoogleTagManager]),
     OwlModule,
     SocialLoginModule,
     FormsModule,
