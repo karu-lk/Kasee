@@ -3,12 +3,15 @@ import { promise } from 'protractor';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from "rxjs/Rx"
 import { ISpec } from '../../models/ISpec';
+import { ConfigurationService } from './../configuration.service';
 
-let baseUrl = "http://localhost:3001/api/v1/";
+let baseUrl;// = "http://localhost:3001/api/v1/";
 
 @Injectable()
 export class SpecService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private serviceConfig:ConfigurationService) { 
+    baseUrl = serviceConfig.protocol + "://" + serviceConfig.hostName + ":" + serviceConfig.apiPort + "/api/" + serviceConfig.apiVersion + "/";
+  }
 
   createSpec(newSpec): any {
     let headers = new Headers();

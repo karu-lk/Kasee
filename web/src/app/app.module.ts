@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OwlModule } from 'ngx-owl-carousel';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, } from "angular5-social-login";
-//import { HttpModule } from '@angular/http';
-import { HttpClientModule} from '@angular/common/http';
+// import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { appRoutingProviders, routing } from './app.routes';
@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth.service';
 import { UserProfileService } from './services/userProfile/user-profile.service';
 import { CustomerService } from './services/customer/customer.service';
+import { ConfigurationService } from './services/configuration.service';
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 import { UserVerificationComponent } from './user-verification/user-verification.component';
 import { CustomerDetailsComponent } from './customer/customer-details/customer-details.component';
@@ -53,7 +54,7 @@ export function getAuthServiceConfigs() {
     SpecDetailsComponent
   ],
   imports: [
-    //HttpModule,
+    // HttpModule,
     BrowserModule,
     HttpClientModule,
     RouterModule,
@@ -72,6 +73,7 @@ export function getAuthServiceConfigs() {
     },
     UserProfileService,
     CustomerService,
+    ConfigurationService,
     SpecService
   ],
   bootstrap: [AppComponent]

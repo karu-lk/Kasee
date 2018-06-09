@@ -23,6 +23,7 @@ class Server {
     // application config
     config() {
         const MONGO_URI = 'mongodb://localhost/kaseedb';
+        //const MONGO_URI: string = 'mongodb://mongo:27017/kaseedb';
         mongoose.connect(MONGO_URI || process.env.MONGODB_URI);
         // express middleware
         this.app.use(bodyParser.urlencoded({ extended: true }));

@@ -29,7 +29,7 @@ class Server {
   // application config
   public config(): void {
 
-    // const MONGO_URI: string = 'mongodb://localhost/kaseedb';
+    //const MONGO_URI: string = 'mongodb://localhost/kaseedb';
     const MONGO_URI: string = 'mongodb://mongo:27017/kaseedb';
     mongoose.connect(MONGO_URI || process.env.MONGODB_URI);
 

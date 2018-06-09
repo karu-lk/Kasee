@@ -2,15 +2,16 @@ version: "3"
 services:
   api:
     container_name: kasee-api
+    hostname: kasee-api
     restart: always
     build: ../api/
     ports:
-      - "3001:80"
+      - "3001:3001"
     links:
       - mongo
-    networks:
-      testing_net:
-        ipv4_address: 172.28.1.1
+    # networks:
+    #   testing_net:
+    #     ipv4_address: 172.28.1.1
 
   web:
     container_name: kasee-web
@@ -20,9 +21,9 @@ services:
       - "3000:80"
     links:
       - api
-    networks:
-      testing_net:
-        ipv4_address: 172.28.1.2
+    # networks:
+    #   testing_net:
+    #     ipv4_address: 172.28.1.2
 
   mongo:
     container_name: kasee-mongo
@@ -32,13 +33,13 @@ services:
     ports:
       - "27017:27017"
     entrypoint: 'mongod --bind_ip_all'
-    networks:
-      testing_net:
-        ipv4_address: 172.28.1.3
+    # networks:
+    #   testing_net:
+    #     ipv4_address: 172.28.1.3
 
-networks:
-  testing_net:
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.28.0.0/16
+# networks:
+#   testing_net:
+#     ipam:
+#       driver: default
+#       config:
+#         - subnet: 172.28.0.0/16
