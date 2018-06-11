@@ -23,6 +23,7 @@ import { CustomerListComponent } from './customer/customer-list/customer-list.co
 import { SpecService } from './services/specification/spec.service';
 import { SpecListComponent } from './spec/spec-list/spec-list.component';
 import { SpecDetailsComponent } from './spec/spec-details/spec-details.component';
+import { SpecVersionComponent } from './spec/spec-version/spec-version.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -51,7 +52,8 @@ export function getAuthServiceConfigs() {
     OrderComponent,
     CustomerListComponent,
     SpecListComponent,
-    SpecDetailsComponent
+    SpecDetailsComponent,
+    SpecVersionComponent
   ],
   imports: [
     // HttpModule,

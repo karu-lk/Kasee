@@ -14,11 +14,13 @@ export class SpecDetailsComponent implements OnInit {
   addNewFlag: boolean = false;
   customerNoForSpec;
   customerList;
+  specVersionList;
 
   constructor(private specService: SpecService, private customerService: CustomerService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadCustomers();
+    //this.loadSpecVersions();
 
     this.disableControls(true);
     this.route.queryParams.subscribe(params => {
@@ -37,6 +39,8 @@ export class SpecDetailsComponent implements OnInit {
   specForm = new FormGroup({
     customerNumber: new FormControl({ value: '', disabled: true }),
     customerName: new FormControl({ value: '', disabled: this.disableControls }),
+    specVersionNumber: new FormControl({ value: '', disabled: this.disableControls }),
+    specVersionName: new FormControl({ value: '', disabled: this.disableControls }),
     shoulder: new FormControl({ value: '', disabled: this.disableControls }),
     shoulderToBust: new FormControl({ value: '', disabled: this.disableControls }),
     shoulderToWaist: new FormControl({ value: '', disabled: this.disableControls }),
@@ -104,6 +108,18 @@ export class SpecDetailsComponent implements OnInit {
       });
   }
 
+  loadSpecVersions(customerNumber) {
+    let _self = this;
+    let enhancedSpecVersionList: any[] = [];
+    let enhancedSpecVersion;
+
+    this.specService.getCustomerSpecVersions(customerNumber).subscribe(
+      res => {
+        console.error('versions', res.result);
+        _self.specVersionList = res.result;
+      });
+  }
+
   addNewCustomerClick() {
     this.disableControls(false);
     this.specForm.reset();
@@ -118,8 +134,13 @@ export class SpecDetailsComponent implements OnInit {
     this.addNewFlag = false;
   }
 
-  customerNameChange(dropDownValue){
+  customerNameChange(dropDownValue) {
     this.specForm.controls.customerNumber.setValue(dropDownValue);
+    this.loadSpecVersions(dropDownValue);
+  }
+
+  specVersionNameChange(dropDownValue) {
+    this.specForm.controls.specVersionNumber.setValue(dropDownValue);
   }
 
   cancelCustomerClick() {

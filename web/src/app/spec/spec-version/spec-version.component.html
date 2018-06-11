@@ -1,0 +1,30 @@
+<div class="list-toolbar">
+  <button class="btn btn-outline-warning" type="button" (click)="addNewCustomerClick()">ADD NEW</button>
+  <button class="btn btn-outline-warning" type="button" (click)="editCustomerClick()">EDIT</button>
+  <button class="btn btn-outline-danger" type="button" (click)="deleteCustomerClick()">DELETE</button>
+  <button class="btn btn-outline-danger" type="button" (click)="cancelCustomerClick()">CANCEL</button>
+</div>
+<div class="customer-form border border-info">
+  <form [formGroup]="specVersionForm" (ngSubmit)="submitSpecVersion()">
+    <div class="form-group">
+      <label for="customerNumber">Customer Number</label>
+      <input type="text" class="form-control" id="customerNumber" aria-describedby="emailHelp" placeholder="Customer Number (A-Z, a-z, 0-9)"
+        required maxlength="12" formControlName="customerNumber" disabled>
+    </div>
+    <div class="form-group">
+      <label for="customerName">Customer Name</label>
+      <select class="dropdown show" name="customerName" formControlName="customerName" (change)="customerNameChange($event.target.value)">
+        <option *ngFor="let customer of customerList" [value]="customer.customerNumber">{{customer.customerName}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="specVersionNumber">Specification Version Number</label>
+      <input type="text" class="form-control" id="shoulder" placeholder="Specification Version Number" required maxlength="45" formControlName="specVersionNumber">
+    </div>
+    <div class="form-group">
+      <label for="specVersionName">Specification Version Name</label>
+      <input type="text" class="form-control" id="shoulder" placeholder="Specification Version Name" required maxlength="45" formControlName="specVersionName">
+    </div>
+    <button class="btn btn-primary" [disabled]="false">Submit</button>
+  </form>
+</div>

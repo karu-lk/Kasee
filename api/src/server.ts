@@ -10,9 +10,7 @@ import * as path from 'path';
 
 import customerController from './controllers/customerController';
 import specController from './controllers/specController';
-// import productCategoryController from './controllers/productCategoryController';
-// import productImageGalleryController from './controllers/productImageGalleryController';
-// import stockController from './controllers/stockController';
+import specVersionController from './controllers/specVersionController';
 import userProfileController from './controllers/userProfileController';
 
 class Server {
@@ -29,8 +27,8 @@ class Server {
   // application config
   public config(): void {
 
-    //const MONGO_URI: string = 'mongodb://localhost/kaseedb';
-    const MONGO_URI: string = 'mongodb://mongo:27017/kaseedb';
+    const MONGO_URI: string = 'mongodb://localhost/kaseedb';
+    //const MONGO_URI: string = 'mongodb://mongo:27017/kaseedb';
     mongoose.connect(MONGO_URI || process.env.MONGODB_URI);
 
     // express middleware
@@ -59,9 +57,7 @@ class Server {
     this.app.use('/', router);
     this.app.use('/api/v1/customers', customerController);
     this.app.use('/api/v1/specifications', specController);
-    // this.app.use('/api/v1/product-categories', productCategoryController);
-    // this.app.use('/api/v1/product-images', productImageGalleryController);
-    // this.app.use('/api/v1/stock', stockController);
+    this.app.use('/api/v1/specificationVersions', specVersionController);
     this.app.use('/api/v1/users', userProfileController);
   }
 }

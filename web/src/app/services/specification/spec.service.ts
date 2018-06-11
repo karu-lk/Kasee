@@ -4,12 +4,13 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from "rxjs/Rx"
 import { ISpec } from '../../models/ISpec';
 import { ConfigurationService } from './../configuration.service';
+import { ISpecVersion } from '../../models/ISpecVersion';
 
 let baseUrl;// = "http://localhost:3001/api/v1/";
 
 @Injectable()
 export class SpecService {
-  constructor(private http: HttpClient, private serviceConfig:ConfigurationService) { 
+  constructor(private http: HttpClient, private serviceConfig: ConfigurationService) {
     baseUrl = serviceConfig.protocol + "://" + serviceConfig.hostName + ":" + serviceConfig.apiPort + "/api/" + serviceConfig.apiVersion + "/";
   }
 
@@ -39,6 +40,33 @@ export class SpecService {
     let res: Observable<ISpec>;
 
     res = this.http.get<ISpec>(baseUrl + 'specifications/' + specCustomerNumber);
+    return res;
+  }
+
+  createSpecVersion(newSpecVersion): any {
+    let headers = new Headers();
+    console.error('at service level', newSpecVersion);
+    return this.http.post(baseUrl + 'specificationversions', newSpecVersion);
+  }
+
+  public getAllSpecVersions(): Observable<any> {
+    let res: Observable<ISpecVersion>;
+
+    res = this.http.get<ISpecVersion>(baseUrl + 'specificationversions');
+    return res;
+  }
+
+  public getCustomerSpecVersions(customerNumber): Observable<any> {
+    let res: Observable<ISpecVersion>;
+
+    res = this.http.get<ISpecVersion>(baseUrl + 'specificationversions/' + customerNumber);
+    return res;
+  }
+
+  public getSpecVersion(specCustomerNumber, specVersionNumber): Observable<any> {
+    let res: Observable<ISpecVersion>;
+
+    res = this.http.get<ISpecVersion>(baseUrl + 'specificationversion/' + specCustomerNumber + '/' + specVersionNumber);
     return res;
   }
 }

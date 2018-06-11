@@ -3,6 +3,7 @@
   <button class="btn btn-outline-warning" type="button" (click)="editCustomerClick()">EDIT</button>
   <button class="btn btn-outline-danger" type="button" (click)="deleteCustomerClick()">DELETE</button>
   <button class="btn btn-outline-danger" type="button" (click)="cancelCustomerClick()">CANCEL</button>
+  <button class="btn btn-outline-warning" type="button" routerLink="/spec-version">SPEC VERSION</button>
 </div>
 <div class="customer-form border border-info">
   <form [formGroup]="specForm" (ngSubmit)="submitCustomer()">
@@ -15,6 +16,17 @@
       <label for="customerName">Customer Name</label>
       <select class="dropdown show" name="customerName" formControlName="customerName" (change)="customerNameChange($event.target.value)">
         <option *ngFor="let customer of customerList" [value]="customer.customerNumber">{{customer.customerName}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="SpecVersionNumber">Spec Version Number</label>
+      <input type="text" class="form-control" id="SpecVersionNumber" aria-describedby="emailHelp" placeholder="Customer Number (A-Z, a-z, 0-9)"
+        required maxlength="12" formControlName="specVersionNumber" disabled>
+    </div>
+    <div class="form-group">
+      <label for="SpecVersionName">Spec Version Name</label>
+      <select class="dropdown show" name="SpecVersionName" formControlName="specVersionName" (change)="specVersionNameChange($event.target.value)">
+        <option *ngFor="let specVersion of specVersionList" [value]="specVersion.specVersionNumber">{{specVersion.specVersionName}}</option>
       </select>
     </div>
     <div class="form-group">
