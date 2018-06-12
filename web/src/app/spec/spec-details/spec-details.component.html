@@ -28,6 +28,7 @@
       <select class="dropdown show" name="SpecVersionName" formControlName="specVersionName" (change)="specVersionNameChange($event.target.value)">
         <option *ngFor="let specVersion of specVersionList" [value]="specVersion.specVersionNumber">{{specVersion.specVersionName}}</option>
       </select>
+      <button class="btn" id="addNewSpecVersion" (click)="addNewSpecVersion()">+</button>
     </div>
     <div class="form-group">
       <label for="shoulder">Shoulder</label>

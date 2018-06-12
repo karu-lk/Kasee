@@ -35,11 +35,11 @@ export class SpecVersionController {
     }
 
     // get a single post by params of 'slug'
-    public oneByCustomer(req: Request, res: Response): void {
-        const customerNumber: string = req.params['customernumber'];
+    public maxVersionByCustomer(req: Request, res: Response): void {
+        const customerNumber: string = req.params.customernumber;
 
-        console.error('at one by customer', customerNumber);
-        SpecificationVersion.find({ customerNumber: customerNumber })
+        SpecificationVersion.findOne({ customerNumber: customerNumber })
+            .sort({ specificationVersionNumber: -1 })
             .then((data) => {
                 res.status(200).json({ data });
             })
@@ -104,8 +104,8 @@ export class SpecVersionController {
 
     public routes() {
         this.router.get('/', this.all);
-        this.router.get('/:customernumber/:specificationVersionNumber', this.one);
-        this.router.get('/:customernumber', this.oneByCustomer);
+        //this.router.get('/:customernumber/:specificationVersionNumber', this.one);
+        this.router.get('/getmax/:customernumber', this.maxVersionByCustomer);
         this.router.post('/', this.create);
         this.router.put('/:customernumber', this.update);
         this.router.delete('/:customernumber', this.delete);

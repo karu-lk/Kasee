@@ -16,25 +16,31 @@ export class SpecVersionComponent implements OnInit {
   constructor(private specService: SpecService, private customerService: CustomerService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadCustomers();
+    //this.loadCustomers();
+
+    this.route.queryParams.subscribe(params => {
+      if (params.customerNumber) {
+        this.loadCustomer(params.customerNumber);
+      }
+    });
   }
 
-  submitSpecVersion(){
+  submitSpecVersion() {
     let _self = this;
-      this.specService.createSpecVersion(this.specVersionForm.value)
-        .subscribe(res => {
-          if (res) {
-            _self.router.navigate(['/spec-details']);
-          }
-        }, (err) => {
-          console.log(err);
-        });
+    this.specService.createSpecVersion(this.specVersionForm.value)
+      .subscribe(res => {
+        if (res) {
+          _self.router.navigate(['/spec-details']);
+        }
+      }, (err) => {
+        console.log(err);
+      });
   };
 
   specVersionForm = new FormGroup({
     customerNumber: new FormControl({ value: '', disabled: true }),
-    customerName: new FormControl({ value: ''}),
-    specVersionNumber: new FormControl({ value: ''}),
+    customerName: new FormControl({ value: '' }),
+    specVersionNumber: new FormControl({ value: '' }),
     specVersionName: new FormControl({ value: '' })
   });
 
@@ -53,7 +59,23 @@ export class SpecVersionComponent implements OnInit {
       });
   }
 
-  customerNameChange(dropDownValue){
+  loadNextSpecVersionNumber() {
+    this.specService.getSpecVersion(this.specVersionForm.controls['customerNumber'].value, null, true)
+      .subscribe(res => {
+        console.error('max version no', res);
+      });
+  }
+
+  loadCustomer(customerNumber) {
+    this.customerService.getCustomer(customerNumber).subscribe(
+      res => {
+        this.specVersionForm.controls['customerNumber'].setValue(res.data['customerNumber'], { onlySelf: true });
+        this.specVersionForm.controls['customerName'].setValue(res.data['firstName'] + ' ' + res.data['lastName'], { onlySelf: true });
+        this.loadNextSpecVersionNumber();
+      });
+  }
+
+  customerNameChange(dropDownValue) {
     this.specVersionForm.controls.customerNumber.setValue(dropDownValue);
   }
 }

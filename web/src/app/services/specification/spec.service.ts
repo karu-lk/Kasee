@@ -63,10 +63,15 @@ export class SpecService {
     return res;
   }
 
-  public getSpecVersion(specCustomerNumber, specVersionNumber): Observable<any> {
+  public getSpecVersion(specCustomerNumber, specVersionNumber, latest): Observable<any> {
     let res: Observable<ISpecVersion>;
 
-    res = this.http.get<ISpecVersion>(baseUrl + 'specificationversion/' + specCustomerNumber + '/' + specVersionNumber);
+    if (!latest) {
+      res = this.http.get<ISpecVersion>(baseUrl + 'specificationversion/' + specCustomerNumber + '/' + specVersionNumber + '/' + latest);
+    }
+    else {
+      res = this.http.get<ISpecVersion>(baseUrl + 'specificationversion/' + specCustomerNumber + '/' + null + '/' + latest);
+    }
     return res;
   }
 }

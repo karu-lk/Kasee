@@ -20,7 +20,6 @@ export class SpecDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.loadCustomers();
-    //this.loadSpecVersions();
 
     this.disableControls(true);
     this.route.queryParams.subscribe(params => {
@@ -115,9 +114,13 @@ export class SpecDetailsComponent implements OnInit {
 
     this.specService.getCustomerSpecVersions(customerNumber).subscribe(
       res => {
-        console.error('versions', res.result);
         _self.specVersionList = res.result;
       });
+  }
+
+  addNewSpecVersion(){
+
+    this.router.navigate(['/spec-version'], { queryParams: { "customerNumber": this.specForm.controls.customerNumber.value } });
   }
 
   addNewCustomerClick() {

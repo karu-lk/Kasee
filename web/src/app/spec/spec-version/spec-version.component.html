@@ -13,9 +13,11 @@
     </div>
     <div class="form-group">
       <label for="customerName">Customer Name</label>
-      <select class="dropdown show" name="customerName" formControlName="customerName" (change)="customerNameChange($event.target.value)">
+      <!-- <select class="dropdown show" name="customerName" formControlName="customerName" (change)="customerNameChange($event.target.value)">
         <option *ngFor="let customer of customerList" [value]="customer.customerNumber">{{customer.customerName}}</option>
-      </select>
+      </select> -->
+      <input type="text" class="form-control" id="customerName" aria-describedby="emailHelp" placeholder="Customer Name (A-Z, a-z, 0-9)"
+        required maxlength="40" formControlName="customerName" disabled>
     </div>
     <div class="form-group">
       <label for="specVersionNumber">Specification Version Number</label>
