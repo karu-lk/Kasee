@@ -114,12 +114,12 @@ export class SpecDetailsComponent implements OnInit {
 
     this.specService.getCustomerSpecVersions(customerNumber).subscribe(
       res => {
-        _self.specVersionList = res.result;
+        _self.specVersionList = res.data;
+        this.specForm.controls.specVersionName.enable();
       });
   }
 
   addNewSpecVersion(){
-
     this.router.navigate(['/spec-version'], { queryParams: { "customerNumber": this.specForm.controls.customerNumber.value } });
   }
 

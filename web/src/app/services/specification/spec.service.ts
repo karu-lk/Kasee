@@ -45,7 +45,6 @@ export class SpecService {
 
   createSpecVersion(newSpecVersion): any {
     let headers = new Headers();
-    console.error('at service level', newSpecVersion);
     return this.http.post(baseUrl + 'specificationversions', newSpecVersion);
   }
 
@@ -63,15 +62,10 @@ export class SpecService {
     return res;
   }
 
-  public getSpecVersion(specCustomerNumber, specVersionNumber, latest): Observable<any> {
+  public getCurrentSpecVersion(specCustomerNumber): Observable<any> {
     let res: Observable<ISpecVersion>;
 
-    if (!latest) {
-      res = this.http.get<ISpecVersion>(baseUrl + 'specificationversion/' + specCustomerNumber + '/' + specVersionNumber + '/' + latest);
-    }
-    else {
-      res = this.http.get<ISpecVersion>(baseUrl + 'specificationversion/' + specCustomerNumber + '/' + null + '/' + latest);
-    }
+    res = this.http.get<ISpecVersion>(baseUrl + 'specificationversions/getmax/' + specCustomerNumber);
     return res;
   }
 }

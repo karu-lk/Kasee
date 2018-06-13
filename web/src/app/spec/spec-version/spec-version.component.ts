@@ -16,8 +16,6 @@ export class SpecVersionComponent implements OnInit {
   constructor(private specService: SpecService, private customerService: CustomerService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    //this.loadCustomers();
-
     this.route.queryParams.subscribe(params => {
       if (params.customerNumber) {
         this.loadCustomer(params.customerNumber);
@@ -27,7 +25,7 @@ export class SpecVersionComponent implements OnInit {
 
   submitSpecVersion() {
     let _self = this;
-    this.specService.createSpecVersion(this.specVersionForm.value)
+    this.specService.createSpecVersion(this.specVersionForm.getRawValue())
       .subscribe(res => {
         if (res) {
           _self.router.navigate(['/spec-details']);
@@ -39,8 +37,8 @@ export class SpecVersionComponent implements OnInit {
 
   specVersionForm = new FormGroup({
     customerNumber: new FormControl({ value: '', disabled: true }),
-    customerName: new FormControl({ value: '' }),
-    specVersionNumber: new FormControl({ value: '' }),
+    customerName: new FormControl({ value: '', disabled: true}),
+    specVersionNumber: new FormControl({ value: '', disabled: true }),
     specVersionName: new FormControl({ value: '' })
   });
 
@@ -60,9 +58,14 @@ export class SpecVersionComponent implements OnInit {
   }
 
   loadNextSpecVersionNumber() {
-    this.specService.getSpecVersion(this.specVersionForm.controls['customerNumber'].value, null, true)
+    let nextVersion:number;
+    this.specService.getCurrentSpecVersion(this.specVersionForm.controls['customerNumber'].value)
       .subscribe(res => {
-        console.error('max version no', res);
+        if (res.data.specificationVersionNumber) {
+          nextVersion = res.data.specificationVersionNumber + 1;
+        }
+        this.specVersionForm.controls['specVersionNumber'].setValue(nextVersion, { onlySelf: true });
+        this.specVersionForm.controls['specVersionNumber'].disable();
       });
   }
 
