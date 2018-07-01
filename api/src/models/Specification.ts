@@ -4,7 +4,10 @@ import { model, Schema } from 'mongoose';
 const Specification: Schema = new Schema({
     customerNumber: {
         type: String,
-        unique: true,
+        required: true
+    },
+    specificationVersionNumber: {
+        type: Number,
         required: true
     },
     shoulder: { type: Number },

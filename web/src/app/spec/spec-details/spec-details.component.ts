@@ -59,7 +59,7 @@ export class SpecDetailsComponent implements OnInit {
     underskirtLength: new FormControl({ value: '', disabled: this.disableControls })
   })
 
-  submitCustomer() {
+  saveSpec() {
     let _self = this;
     if (this.addNewFlag) {//ADD NEW
       this.specService.createSpec(this.specForm.value)

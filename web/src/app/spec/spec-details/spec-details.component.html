@@ -6,7 +6,7 @@
   <button class="btn btn-outline-warning" type="button" routerLink="/spec-version">SPEC VERSION</button>
 </div>
 <div class="customer-form border border-info">
-  <form [formGroup]="specForm" (ngSubmit)="submitCustomer()">
+  <form [formGroup]="specForm" (ngSubmit)="saveSpec()">
     <div class="form-group">
       <label for="customerNumber">Customer Number</label>
       <input type="text" class="form-control" id="customerNumber" aria-describedby="emailHelp" placeholder="Customer Number (A-Z, a-z, 0-9)"

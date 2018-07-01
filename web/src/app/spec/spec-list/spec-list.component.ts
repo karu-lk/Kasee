@@ -24,7 +24,7 @@ export class SpecListComponent implements OnInit {
   ngOnInit() {
     this.loadSpecs();
   }
-  
+
   loadSpecs() {
     let _self = this;
     let spec;
@@ -36,10 +36,16 @@ export class SpecListComponent implements OnInit {
         res.result.forEach(element => {
           _self.getCustomerNameByNumber(element.customerNumber).subscribe(
             cus => {
-              let name = cus.data.firstName + cus.data.lastName;
-              spec = { "customerNumber": element.customerNumber, "customerName": cus.data.firstName + ' ' + cus.data.lastName, "mobileNumber": cus.data.mobileNumber };
-              specList.push(spec);
-              _self.specList = specList;
+              _self.getSpecVersionNameByNumber(element.specificationVersionNumber).subscribe(
+                specVersion => {
+                  let name = cus.data.firstName + cus.data.lastName;
+                  spec = {
+                    "customerNumber": element.customerNumber, "customerName": name, "specVersionNumber": element.specificationVersionNumber,
+                    "specVersionName": specVersion.data.specificationVersionName, "mobileNumber": cus.data.mobileNumber
+                  };
+                  specList.push(spec);
+                  _self.specList = specList;
+                });
             });
         });
       });
@@ -49,8 +55,12 @@ export class SpecListComponent implements OnInit {
     return this.customerService.getCustomer(customerNumber);
   }
 
-  viewSpec(customerNumber) {
-    this.router.navigate(['/spec-details'], { queryParams: { "customerNumber": customerNumber } });
+  getSpecVersionNameByNumber(specNumber) {
+      return this.specService.getVersion(specNumber);
+  }
+
+  viewSpec(customerNumber, specificationVersionNumber) {
+    this.router.navigate(['/spec-details'], { queryParams: { "customerNumber": customerNumber, "specificationVersionNumber":specificationVersionNumber } });
   }
 
   addSpec() {

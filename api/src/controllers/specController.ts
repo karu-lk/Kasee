@@ -36,6 +36,7 @@ export class SpecController {
     // create a new post
     public create(req: Request, res: Response): void {
         const customerNumber: string = req.body.customerName; //customerName's value is customerNumber
+        const specificationVersionNumber: number = req.body.specVersionName; //spec version number is specVersionName in body object
         const shoulder: number = req.body.shoulder;
         const shoulderToBust:number=req.body.shoulderToBust;
         const shoulderToWaist: number = req.body.shoulderToWaist;
@@ -58,8 +59,11 @@ export class SpecController {
             res.status(422).json({ message: 'Required fields missing.' });
         }
 
+        console.error('!!!!', req.body);
+
         const newSpec = new Specification({
             customerNumber,
+            specificationVersionNumber,
             shoulder,
             shoulderToBust,
             shoulderToWaist,

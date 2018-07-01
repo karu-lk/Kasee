@@ -6,14 +6,18 @@
     <tr>
       <th>Customer Number</th>
       <th>Name</th>
+      <th>Spec Version</th>
       <th>Mobile Number</th>
       <th></th>
     </tr>
     <tr *ngFor='let spec of specList'>
       <td>{{spec.customerNumber}}</td>
       <td>{{spec.customerName}}</td>
+      <td>{{spec.specVersionName }}</td>
       <td>{{spec.mobileNumber}}</td>
-      <td><button type="button" class="btn btn-sm btn-outline-info" (click)="viewSpec(spec.customerNumber)">VIEW</button></td>
+      <td>
+        <button type="button" class="btn btn-sm btn-outline-info" (click)="viewSpec(spec.customerNumber, spec.specificationVersionNumber)">VIEW</button>
+      </td>
     </tr>
   </table>
 </div>

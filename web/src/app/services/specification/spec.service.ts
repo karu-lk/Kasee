@@ -48,6 +48,13 @@ export class SpecService {
     return this.http.post(baseUrl + 'specificationversions', newSpecVersion);
   }
 
+  public getSpecVersion(): Observable<any> {
+    let res: Observable<ISpecVersion>;
+
+    res = this.http.get<ISpecVersion>(baseUrl + 'specificationversions');
+    return res;
+  }
+
   public getAllSpecVersions(): Observable<any> {
     let res: Observable<ISpecVersion>;
 
@@ -66,6 +73,13 @@ export class SpecService {
     let res: Observable<ISpecVersion>;
 
     res = this.http.get<ISpecVersion>(baseUrl + 'specificationversions/getmax/' + specCustomerNumber);
+    return res;
+  }
+
+  public getVersion(versionNumber): Observable<any> {
+    let res: Observable<ISpecVersion>;
+
+    res = this.http.get<ISpecVersion>(baseUrl + 'specificationversions/byversionnumber/' + versionNumber);
     return res;
   }
 }
