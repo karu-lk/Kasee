@@ -22,9 +22,11 @@ export class SpecController {
 
     // get a single post by params of 'slug'
     public one(req: Request, res: Response): void {
-        const customerNumber: string = req.params['customernumber'];
+        console.error('at spec controller', req.params);
+        const customerNumber: string = req.params['customerNumber'];
+        const specificationVersionNumber: string = req.params['versionNumber'];
 
-        Specification.findOne({ customerNumber })
+        Specification.findOne({ customerNumber, specificationVersionNumber })
             .then((data) => {
                 res.status(200).json({ data });
             })
@@ -120,7 +122,9 @@ export class SpecController {
 
     public routes() {
         this.router.get('/', this.all);
-        this.router.get('/:customernumber', this.one);
+        // this.router.get('/:customernumber', this.one);
+        this.router.get('/customer/:customerNumber/version/:versionNumber', this.one);
+        //this.router.post('/singlespec', this.one);
         this.router.post('/', this.create);
         this.router.put('/:customernumber', this.update);
         this.router.delete('/:customernumber', this.delete);

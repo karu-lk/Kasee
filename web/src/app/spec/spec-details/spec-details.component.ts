@@ -13,6 +13,7 @@ import { CustomerService } from '../../services/customer/customer.service';
 export class SpecDetailsComponent implements OnInit {
   addNewFlag: boolean = false;
   customerNoForSpec;
+  versionNoForSpec;
   customerList;
   specVersionList;
 
@@ -30,7 +31,8 @@ export class SpecDetailsComponent implements OnInit {
       }
       else {
         this.customerNoForSpec = params.customerNumber;
-        this.loadCustomerSpec(this.customerNoForSpec);
+        this.versionNoForSpec = params.specVersionNumber;
+        this.loadCustomerSpec(this.customerNoForSpec, this.versionNoForSpec);
       }
     });
   }
@@ -38,7 +40,7 @@ export class SpecDetailsComponent implements OnInit {
   specForm = new FormGroup({
     customerNumber: new FormControl({ value: '', disabled: true }),
     customerName: new FormControl({ value: '', disabled: this.disableControls }),
-    specVersionNumber: new FormControl({ value: '', disabled: this.disableControls }),
+    specificationVersionNumber: new FormControl({ value: '', disabled: this.disableControls }),
     specVersionName: new FormControl({ value: '', disabled: this.disableControls }),
     shoulder: new FormControl({ value: '', disabled: this.disableControls }),
     shoulderToBust: new FormControl({ value: '', disabled: this.disableControls }),
@@ -82,12 +84,18 @@ export class SpecDetailsComponent implements OnInit {
     }
   }
 
-  loadCustomerSpec(customerNumber) {
-    if (customerNumber) {
-      this.specService.getSpec(customerNumber).subscribe(
+  loadCustomerSpec(customerNumber, versionNoForSpec) {
+    if (customerNumber && versionNoForSpec) {
+      this.specService.getSpec(customerNumber, versionNoForSpec).subscribe(
         res => {
           this.specForm.patchValue(res.data);
           this.specForm.controls['customerName'].setValue(res.data['customerNumber'], { onlySelf: true });
+
+          this.getSpecVersionNameByNumber(res.data.specificationVersionNumber).subscribe(
+            version => {
+              this.specForm.controls['specVersionName'].setValue(version.specificationVersionName, { onlySelf: true });
+            }
+          )
         });
     }
   }
@@ -119,8 +127,12 @@ export class SpecDetailsComponent implements OnInit {
       });
   }
 
-  addNewSpecVersion(){
+  addNewSpecVersion() {
     this.router.navigate(['/spec-version'], { queryParams: { "customerNumber": this.specForm.controls.customerNumber.value } });
+  }
+
+  getSpecVersionNameByNumber(specNumber) {
+    return this.specService.getVersion(specNumber);
   }
 
   addNewCustomerClick() {

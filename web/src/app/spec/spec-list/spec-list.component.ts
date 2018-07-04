@@ -59,8 +59,8 @@ export class SpecListComponent implements OnInit {
       return this.specService.getVersion(specNumber);
   }
 
-  viewSpec(customerNumber, specificationVersionNumber) {
-    this.router.navigate(['/spec-details'], { queryParams: { "customerNumber": customerNumber, "specificationVersionNumber":specificationVersionNumber } });
+  viewSpec(customerNumber, specVersionNumber) {
+    this.router.navigate(['/spec-details'], { queryParams: { "customerNumber": customerNumber, "specVersionNumber":specVersionNumber } });
   }
 
   addSpec() {

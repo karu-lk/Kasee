@@ -36,10 +36,11 @@ export class SpecService {
     return res;
   }
 
-  public getSpec(specCustomerNumber): Observable<any> {
+  public getSpec(specCustomerNumber, specVersionNo): Observable<any> {
     let res: Observable<ISpec>;
 
-    res = this.http.get<ISpec>(baseUrl + 'specifications/' + specCustomerNumber);
+    //localhost:3001/api/v1/specifications/customer/B-2018-02/version/1
+    res = this.http.get<ISpec>(baseUrl + 'specifications/customer/' + specCustomerNumber + '/version/' + specVersionNo);
     return res;
   }
 
