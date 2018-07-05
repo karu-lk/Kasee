@@ -37,9 +37,9 @@ export class SpecVersionComponent implements OnInit {
 
   specVersionForm = new FormGroup({
     customerNumber: new FormControl({ value: '', disabled: true }),
-    customerName: new FormControl({ value: '', disabled: true}),
+    customerName: new FormControl({ value: '', disabled: true }),
     specVersionNumber: new FormControl({ value: '', disabled: true }),
-    specVersionName: new FormControl({ value: '' })
+    specVersionName: new FormControl({ })
   });
 
   loadCustomers() {
@@ -58,10 +58,10 @@ export class SpecVersionComponent implements OnInit {
   }
 
   loadNextSpecVersionNumber() {
-    let nextVersion:number;
+    let nextVersion: number;
     this.specService.getCurrentSpecVersion(this.specVersionForm.controls['customerNumber'].value)
       .subscribe(res => {
-        if (res.data.specificationVersionNumber) {
+        if (res.data.specificationVersionNumber != null) {
           nextVersion = res.data.specificationVersionNumber + 1;
         }
         this.specVersionForm.controls['specVersionNumber'].setValue(nextVersion, { onlySelf: true });
@@ -80,5 +80,9 @@ export class SpecVersionComponent implements OnInit {
 
   customerNameChange(dropDownValue) {
     this.specVersionForm.controls.customerNumber.setValue(dropDownValue);
+  }
+
+  cancelSpecVersionClick(){
+    this.router.navigate(['/spec-details']);
   }
 }

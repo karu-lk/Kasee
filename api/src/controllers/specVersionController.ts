@@ -67,7 +67,17 @@ export class SpecVersionController {
         SpecificationVersion.findOne({ customerNumber: customerNumber })
             .sort({ specificationVersionNumber: -1 })
             .then((data) => {
-                res.status(200).json({ data });
+                if (data) {
+                    res.status(200).json({ data });
+                }
+                else {
+                    let data = {
+                        customerNumber: null,
+                        specificationVersionNumber: 0,
+                        specificationVersionName: null
+                    }
+                    res.status(200).json({ data });
+                }
             })
             .catch((error) => {
                 res.status(500).json({ error });
@@ -76,7 +86,7 @@ export class SpecVersionController {
 
     // create a new post
     public addNewSpecificationVersion(req: Request, res: Response): void {
-        const customerNumber: string = req.body.customerName; //customerName's value is customerNumber
+        const customerNumber: string = req.body.customerNumber; //customerName's value is customerNumber
         const specificationVersionNumber: number = req.body.specVersionNumber;
         const specificationVersionName: number = req.body.specVersionName;
 

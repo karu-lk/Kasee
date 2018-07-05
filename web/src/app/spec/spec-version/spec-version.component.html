@@ -1,29 +1,28 @@
 <div class="list-toolbar">
-  <button class="btn btn-outline-warning" type="button" (click)="addNewCustomerClick()">ADD NEW</button>
-  <button class="btn btn-outline-warning" type="button" (click)="editCustomerClick()">EDIT</button>
-  <button class="btn btn-outline-danger" type="button" (click)="deleteCustomerClick()">DELETE</button>
-  <button class="btn btn-outline-danger" type="button" (click)="cancelCustomerClick()">CANCEL</button>
+  <button class="btn btn-outline-danger" type="button" (click)="cancelSpecVersionClick()">CANCEL</button>
 </div>
 <div class="customer-form border border-info">
   <form [formGroup]="specVersionForm" (ngSubmit)="submitSpecVersion()">
     <div class="form-group">
       <label for="customerNumber">Customer Number</label>
       <input type="text" class="form-control" id="customerNumber" aria-describedby="emailHelp" placeholder="Customer Number (A-Z, a-z, 0-9)"
-        required maxlength="12" formControlName="customerNumber" disabled>
+        required maxlength="12" formControlName="customerNumber">
     </div>
     <div class="form-group">
       <label for="customerName">Customer Name</label>
       <input type="text" class="form-control" id="customerName" aria-describedby="emailHelp" placeholder="Customer Name (A-Z, a-z, 0-9)"
-        required maxlength="40" formControlName="customerName" disabled>
+        required maxlength="40" formControlName="customerName">
     </div>
     <div class="form-group">
       <label for="specVersionNumber">Specification Version Number</label>
-      <input type="text" class="form-control" id="specVersionNumber" placeholder="Specification Version Number" required maxlength="45" formControlName="specVersionNumber">
+      <input type="text" class="form-control" id="specVersionNumber" placeholder="Specification Version Number" required maxlength="45"
+        formControlName="specVersionNumber">
     </div>
     <div class="form-group">
       <label for="specVersionName">Specification Version Name</label>
-      <input type="text" class="form-control" id="specVersionName" placeholder="Specification Version Name" required maxlength="45" formControlName="specVersionName">
+      <input type="text" class="form-control" id="specVersionName" placeholder="Specification Version Name" required maxlength="45"
+        formControlName="specVersionName">
     </div>
-    <button class="btn btn-primary" [disabled]="false">Submit</button>
+    <button type="submit" class="btn btn-primary" [disabled]="false">Save Specification Version</button>
   </form>
 </div>

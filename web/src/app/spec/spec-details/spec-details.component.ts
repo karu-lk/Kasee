@@ -157,7 +157,7 @@ export class SpecDetailsComponent implements OnInit {
   }
 
   specVersionNameChange(dropDownValue) {
-    this.specForm.controls.specVersionNumber.setValue(dropDownValue);
+    this.specForm.controls.specificationVersionNumber.setValue(dropDownValue);
   }
 
   cancelCustomerClick() {
