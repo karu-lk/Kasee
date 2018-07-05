@@ -10,7 +10,7 @@ export class SpecVersionController {
     }
 
     // get all of the posts in the database
-    public all(req: Request, res: Response): void {
+    public getAllSpecificationVersions(req: Request, res: Response): void {
         SpecificationVersion.find()
             .then((result) => {
                 res.status(200).json({ result });
@@ -21,7 +21,7 @@ export class SpecVersionController {
     }
 
     // get a single post by params of 'slug'
-    public findVersionByNumber(req: Request, res: Response): void {
+    public getSpecificationVersionByVersionNumber(req: Request, res: Response): void {
         const versionNumber: string = req.params.versionnumber;
 
         SpecificationVersion.findOne({ specificationVersionNumber: versionNumber })
@@ -34,10 +34,22 @@ export class SpecVersionController {
     }
 
     // get a single post by params of 'slug'
-    public findByCustomer(req: Request, res: Response): void {
+    public getSpecificationVersionByCustomerAndVersion(req: Request, res: Response): void {
+        const customerNumber: string = req.params.customerNumber;
+        const versionNumber: string = req.params.versionNumber;
+
+        SpecificationVersion.findOne({ customerNumber: customerNumber, specificationVersionNumber: versionNumber })
+            .then((data) => {
+                res.status(200).json({ data });
+            })
+            .catch((error) => {
+                res.status(500).json({ error });
+            });
+    }
+
+    // get a single post by params of 'slug'
+    public getSpecificationVersionByCustomer(req: Request, res: Response): void {
         const customerNumber: string = req.params['customernumber'];
-        console.error('at service', { 1: req.params, 2: customerNumber });
-        //const specificationVersionNumber: number = req.params['specificationVersionNumber'];
 
         SpecificationVersion.find({ customerNumber: customerNumber })
             .then((data) => {
@@ -49,7 +61,7 @@ export class SpecVersionController {
     }
 
     // get a single post by params of 'slug'
-    public maxVersionByCustomer(req: Request, res: Response): void {
+    public getMaxSpecificationVersionByCustomer(req: Request, res: Response): void {
         const customerNumber: string = req.params.customernumber;
 
         SpecificationVersion.findOne({ customerNumber: customerNumber })
@@ -63,7 +75,7 @@ export class SpecVersionController {
     }
 
     // create a new post
-    public create(req: Request, res: Response): void {
+    public addNewSpecificationVersion(req: Request, res: Response): void {
         const customerNumber: string = req.body.customerName; //customerName's value is customerNumber
         const specificationVersionNumber: number = req.body.specVersionNumber;
         const specificationVersionName: number = req.body.specVersionName;
@@ -88,7 +100,7 @@ export class SpecVersionController {
     }
 
     // update post by params of 'slug'
-    public update(req: Request, res: Response): void {
+    public updateSpecificationVersion(req: Request, res: Response): void {
         const customerNumber: number = req.body.customerNumber;
         const specificationVersionNumber: number = req.body.specificationVersionNumber;
 
@@ -102,7 +114,7 @@ export class SpecVersionController {
     }
 
     // delete post by params of 'slug'
-    public delete(req: Request, res: Response): void {
+    public deleteSpecificationVersion(req: Request, res: Response): void {
         const customerNumber: string = req.params['customernumber'];
         const specificationVersionNumber: number = req.params['specificationVersionNumber'];
 
@@ -116,13 +128,14 @@ export class SpecVersionController {
     }
 
     public routes() {
-        this.router.get('/', this.all);
-        this.router.get('/:customernumber', this.findByCustomer);
-        this.router.get('/byversionnumber/:versionnumber', this.findVersionByNumber);
-        this.router.get('/getmax/:customernumber', this.maxVersionByCustomer);
-        this.router.post('/', this.create);
-        this.router.put('/:customernumber', this.update);
-        this.router.delete('/:customernumber', this.delete);
+        this.router.get('/', this.getAllSpecificationVersions);
+        this.router.get('/:customernumber', this.getSpecificationVersionByCustomer);
+        this.router.get('/byversionnumber/:versionnumber', this.getSpecificationVersionByVersionNumber);
+        this.router.get('/customer/:customerNumber/version/:versionNumber', this.getSpecificationVersionByCustomerAndVersion);
+        this.router.get('/getmax/:customernumber', this.getMaxSpecificationVersionByCustomer);
+        this.router.post('/', this.addNewSpecificationVersion);
+        this.router.put('/:customernumber', this.updateSpecificationVersion);
+        this.router.delete('/:customernumber', this.deleteSpecificationVersion);
     }
 }
 

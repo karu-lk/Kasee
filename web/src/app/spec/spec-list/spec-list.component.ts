@@ -36,7 +36,7 @@ export class SpecListComponent implements OnInit {
         res.result.forEach(element => {
           _self.getCustomerNameByNumber(element.customerNumber).subscribe(
             cus => {
-              _self.getSpecVersionNameByNumber(element.specificationVersionNumber).subscribe(
+              _self.getSpecVersionNameByNumber(element.customerNumber,element.specificationVersionNumber).subscribe(
                 specVersion => {
                   let name = cus.data.firstName + cus.data.lastName;
                   spec = {
@@ -55,8 +55,8 @@ export class SpecListComponent implements OnInit {
     return this.customerService.getCustomer(customerNumber);
   }
 
-  getSpecVersionNameByNumber(specNumber) {
-      return this.specService.getVersion(specNumber);
+  getSpecVersionNameByNumber(customerNumber, specNumber) {
+      return this.specService.getVersion(customerNumber, specNumber);
   }
 
   viewSpec(customerNumber, specVersionNumber) {

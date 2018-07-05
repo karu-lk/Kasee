@@ -6,7 +6,6 @@ import * as express from 'express';
 import * as helmet from 'helmet';
 import * as mongoose from 'mongoose';
 import * as logger from 'morgan';
-import * as path from 'path';
 
 import customerController from './controllers/customerController';
 import specController from './controllers/specController';
@@ -62,7 +61,4 @@ class Server {
   }
 }
 
-
-
-// export
 export default new Server().app;

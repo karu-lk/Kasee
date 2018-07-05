@@ -77,10 +77,10 @@ export class SpecService {
     return res;
   }
 
-  public getVersion(versionNumber): Observable<any> {
+  public getVersion(customerNumber, versionNumber): Observable<any> {
     let res: Observable<ISpecVersion>;
 
-    res = this.http.get<ISpecVersion>(baseUrl + 'specificationversions/byversionnumber/' + versionNumber);
+    res = this.http.get<ISpecVersion>(baseUrl + 'specificationversions/customer/' + customerNumber + '/version/' + versionNumber);
     return res;
   }
 }

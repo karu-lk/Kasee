@@ -32,6 +32,7 @@ export class SpecDetailsComponent implements OnInit {
       else {
         this.customerNoForSpec = params.customerNumber;
         this.versionNoForSpec = params.specVersionNumber;
+        this.loadSpecVersions(this.customerNoForSpec);
         this.loadCustomerSpec(this.customerNoForSpec, this.versionNoForSpec);
       }
     });
@@ -91,9 +92,10 @@ export class SpecDetailsComponent implements OnInit {
           this.specForm.patchValue(res.data);
           this.specForm.controls['customerName'].setValue(res.data['customerNumber'], { onlySelf: true });
 
-          this.getSpecVersionNameByNumber(res.data.specificationVersionNumber).subscribe(
+          this.specService.getVersion(customerNumber, res.data.specificationVersionNumber).subscribe(
             version => {
-              this.specForm.controls['specVersionName'].setValue(version.specificationVersionName, { onlySelf: true });
+              this.specForm.controls['specVersionName'].setValue(version.data['specificationVersionNumber'], { onlySelf: true });
+              this.specForm.controls.specVersionName.disable();
             }
           )
         });
@@ -117,8 +119,8 @@ export class SpecDetailsComponent implements OnInit {
 
   loadSpecVersions(customerNumber) {
     let _self = this;
-    let enhancedSpecVersionList: any[] = [];
-    let enhancedSpecVersion;
+    // let enhancedSpecVersionList: any[] = [];
+    // let enhancedSpecVersion;
 
     this.specService.getCustomerSpecVersions(customerNumber).subscribe(
       res => {
@@ -131,8 +133,8 @@ export class SpecDetailsComponent implements OnInit {
     this.router.navigate(['/spec-version'], { queryParams: { "customerNumber": this.specForm.controls.customerNumber.value } });
   }
 
-  getSpecVersionNameByNumber(specNumber) {
-    return this.specService.getVersion(specNumber);
+  getSpecVersionNameByNumber(customerNumber, specNumber) {
+    return this.specService.getSpec(customerNumber, specNumber);
   }
 
   addNewCustomerClick() {

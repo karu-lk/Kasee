@@ -10,7 +10,7 @@ export class SpecController {
     }
 
     // get all of the posts in the database
-    public all(req: Request, res: Response): void {
+    public getAllSpecifications(req: Request, res: Response): void {
         Specification.find()
             .then((result) => {
                 res.status(200).json({ result });
@@ -21,8 +21,7 @@ export class SpecController {
     }
 
     // get a single post by params of 'slug'
-    public one(req: Request, res: Response): void {
-        console.error('at spec controller', req.params);
+    public getSpecificationByCustomerAndVersion(req: Request, res: Response): void {
         const customerNumber: string = req.params['customerNumber'];
         const specificationVersionNumber: string = req.params['versionNumber'];
 
@@ -36,7 +35,7 @@ export class SpecController {
     }
 
     // create a new post
-    public create(req: Request, res: Response): void {
+    public addNewSpecification(req: Request, res: Response): void {
         const customerNumber: string = req.body.customerName; //customerName's value is customerNumber
         const specificationVersionNumber: number = req.body.specVersionName; //spec version number is specVersionName in body object
         const shoulder: number = req.body.shoulder;
@@ -60,8 +59,6 @@ export class SpecController {
         if (!customerNumber) {
             res.status(422).json({ message: 'Required fields missing.' });
         }
-
-        console.error('!!!!', req.body);
 
         const newSpec = new Specification({
             customerNumber,
@@ -95,7 +92,7 @@ export class SpecController {
     }
 
     // update post by params of 'slug'
-    public update(req: Request, res: Response): void {
+    public updateSpecification(req: Request, res: Response): void {
         const customerNumber: number = req.body.customerNumber;
 
         Specification.findOneAndUpdate({ customerNumber }, req.body)
@@ -108,7 +105,7 @@ export class SpecController {
     }
 
     // delete post by params of 'slug'
-    public delete(req: Request, res: Response): void {
+    public deleteSpecification(req: Request, res: Response): void {
         const customerNumber: string = req.params['customernumber'];
 
         Specification.findOneAndRemove({ customerNumber: customerNumber })
@@ -121,13 +118,11 @@ export class SpecController {
     }
 
     public routes() {
-        this.router.get('/', this.all);
-        // this.router.get('/:customernumber', this.one);
-        this.router.get('/customer/:customerNumber/version/:versionNumber', this.one);
-        //this.router.post('/singlespec', this.one);
-        this.router.post('/', this.create);
-        this.router.put('/:customernumber', this.update);
-        this.router.delete('/:customernumber', this.delete);
+        this.router.get('/', this.getAllSpecifications);
+        this.router.get('/customer/:customerNumber/version/:versionNumber', this.getSpecificationByCustomerAndVersion);
+        this.router.post('/', this.addNewSpecification);
+        this.router.put('/:customernumber', this.updateSpecification);
+        this.router.delete('/:customernumber', this.deleteSpecification);
     }
 }
 

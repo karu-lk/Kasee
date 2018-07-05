@@ -50,6 +50,5 @@ class Server {
         this.app.use('/api/v1/users', userProfileController_1.default);
     }
 }
-// export
 exports.default = new Server().app;
 //# sourceMappingURL=server.js.map
