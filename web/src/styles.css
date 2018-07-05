@@ -2362,3 +2362,10 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   .list-toolbar{
     padding: 8px 0 6px 0;
   }
+
+  .home-page-bg{
+    margin: auto;
+    background-image: url(assets/images/home.jpg);
+    width: 450px;
+    height: 500px;
+  }
