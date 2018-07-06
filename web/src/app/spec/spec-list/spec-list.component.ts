@@ -38,7 +38,7 @@ export class SpecListComponent implements OnInit {
             cus => {
               _self.getSpecVersionNameByNumber(element.customerNumber,element.specificationVersionNumber).subscribe(
                 specVersion => {
-                  let name = cus.data.firstName + cus.data.lastName;
+                  let name = cus.data.firstName + ' ' + cus.data.lastName;
                   spec = {
                     "customerNumber": element.customerNumber, "customerName": name, "specVersionNumber": element.specificationVersionNumber,
                     "specVersionName": specVersion.data.specificationVersionName, "mobileNumber": cus.data.mobileNumber

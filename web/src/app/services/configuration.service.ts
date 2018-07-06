@@ -13,6 +13,11 @@ export class ConfigurationService {
     //CONTAINER
     public protocol = "http";
     public apiVersion = "v1";
-    public hostName = "localhost";
+
+    //DEV
+    //public hostName = "localhost";
+    //DOCKER
+    public hostName = "192.168.1.6";
+
     public apiPort = "3001";
 }

@@ -2365,7 +2365,16 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
   .home-page-bg{
     margin: auto;
-    background-image: url(assets/images/home.jpg);
-    width: 450px;
+    background-image: url(assets/images/home-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: 60%;
+    background-position-x: right;
+    width: 65%;
     height: 500px;
+  }
+
+  .home-page-bg p{
+    padding-top: 140px;
+    margin-right: 5px;
+    font-size: 23px;
   }
