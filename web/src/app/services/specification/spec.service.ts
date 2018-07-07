@@ -6,7 +6,7 @@ import { ISpec } from '../../models/ISpec';
 import { ConfigurationService } from './../configuration.service';
 import { ISpecVersion } from '../../models/ISpecVersion';
 
-let baseUrl;// = "http://localhost:3001/api/v1/";
+let baseUrl;
 
 @Injectable()
 export class SpecService {
@@ -39,7 +39,6 @@ export class SpecService {
   public getSpec(specCustomerNumber, specVersionNo): Observable<any> {
     let res: Observable<ISpec>;
 
-    //localhost:3001/api/v1/specifications/customer/B-2018-02/version/1
     res = this.http.get<ISpec>(baseUrl + 'specifications/customer/' + specCustomerNumber + '/version/' + specVersionNo);
     return res;
   }
